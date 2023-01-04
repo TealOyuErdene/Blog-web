@@ -1,12 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Admin from './admin';
-
-
+import "bootstrap/dist/css/bootstrap.min.css";
+import Admin from "./admin";
 
 function App() {
   return (
     <>
-    <Admin/>
+      <Admin />
     </>
   );
 }
