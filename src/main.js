@@ -65,7 +65,15 @@ function Main() {
     let newTodos = [...todos];
     const index = newTodos.findIndex((todo) => todo.id === id);
     const editedText = prompt("Засна уу", todos[index].text);
-    newTodos[index].text = editedText;
+
+    if (editedText === "") {
+      let utga = editedText;
+      while (utga === "") {
+        utga = prompt("Утга оруул");
+      }
+    } else {
+      newTodos[index].text = editedText;
+    }
     setTodos(newTodos);
   }
   return (
