@@ -1,7 +1,8 @@
 // import CategoryList from "./categoryList";
-import Main from "./main";
+
 import NavbarItem from "./navbar";
 import React, { useState } from "react";
+import Main from "./components/main";
 
 function Admin() {
   return (
