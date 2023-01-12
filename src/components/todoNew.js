@@ -58,7 +58,7 @@ export function TodoNew({ onSave }) {
               type="text"
               placeholder="Ангиллын нэр"
               autoFocus
-              value={text}
+              value={text}~
               onChange={handleTextChange}
               onKeyUp={handleKeyUp}
               style={{ borderColor: error ? "red" : "none" }}
