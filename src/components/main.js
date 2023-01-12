@@ -6,6 +6,7 @@ import { TodoList } from "./todoList";
 function Main() {
   let [todos, setTodos] = useState([]);
   let [editingTexts, setEditingTexts] = useState({});
+  let [error, setError] = useState("");
 
   function handleSave(text) {
     let newTodo = {
@@ -58,9 +59,13 @@ function Main() {
 
   function updateEditingText(index, id) {
     const newTodos = [...todos];
-    newTodos[index].text = editingTexts[id];
-    setTodos(newTodos);
-    cancelEditingText(id);
+    if (!editingTexts[id]) {
+      setError("Aldaa");
+    } else {
+      newTodos[index].text = editingTexts[id];
+      setTodos(newTodos);
+      cancelEditingText(id);
+    }
   }
 
   return (
@@ -70,6 +75,7 @@ function Main() {
           <TodoNew onSave={handleSave} />
 
           <TodoList
+            error={error}
             todos={todos}
             editingTexts={editingTexts}
             cancelEditingText={cancelEditingText}

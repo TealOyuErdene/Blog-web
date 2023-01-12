@@ -1,10 +1,14 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import Admin from "./admin";
+import Main from "./components/main";
+import NavbarItem from "./components/navbar";
+// import { Navbar } from "react-bootstrap";
+// import Admin from "./admin";
 
 function App() {
   return (
     <>
-      <Admin />
+      <NavbarItem />
+      <Main />
     </>
   );
 }

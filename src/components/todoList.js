@@ -11,6 +11,7 @@ export function TodoList({
   editTodoInline,
   handleDelete,
   handleEditingText,
+  error,
 }) {
   return (
     <>
@@ -20,7 +21,15 @@ export function TodoList({
             <div key={todo.id}>
               {editingTexts[todo.id] !== undefined ? (
                 <>
-                  <EditingItem handleEditingText={handleEditingText} cancelEditingText={cancelEditingText} updateEditingText={updateEditingText} todo={todo} index1={index1}/>
+                  <EditingItem
+                    handleEditingText={handleEditingText}
+                    cancelEditingText={cancelEditingText}
+                    updateEditingText={updateEditingText}
+                    todo={todo}
+                    index1={index1}
+                    error={error}
+                    editingTexts={editingTexts}
+                  />
                 </>
               ) : (
                 <div className="d-flex">
@@ -88,7 +97,15 @@ function NormalItem({
   );
 }
 
-function EditingItem({handleEditingText, cancelEditingText, updateEditingText, todo, index1}) {
+function EditingItem({
+  handleEditingText,
+  cancelEditingText,
+  updateEditingText,
+  todo,
+  index1,
+  error,
+  editingTexts,
+}) {
   return (
     <>
       <Card
@@ -98,8 +115,9 @@ function EditingItem({handleEditingText, cancelEditingText, updateEditingText, t
         <InputGroup size="lg">
           <Form.Control
             aria-describedby="inputGroup-sizing-sm"
+            value={editingTexts[todo.id]}
             onChange={(e) => handleEditingText(todo.id, e)}
-            // style={{borderColor: "" ?  "red" : "black"}}
+            style={{ borderColor: error ? "red" : "none" }}
           />
         </InputGroup>
         <Button

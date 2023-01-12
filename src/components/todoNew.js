@@ -61,7 +61,7 @@ export function TodoNew({ onSave }) {
               value={text}
               onChange={handleTextChange}
               onKeyUp={handleKeyUp}
-              style={{ borderColor: error ? "red" : "black" }}
+              style={{ borderColor: error ? "red" : "none" }}
             />
           </Form.Group>
         </Modal.Body>
