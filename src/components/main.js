@@ -43,6 +43,7 @@ function Main() {
     const newEditingTexts = { ...editingTexts };
     newEditingTexts[id] = todos[index].text;
     setEditingTexts(newEditingTexts);
+     setError("")
   }
 
   function handleEditingText(id, e) {
@@ -59,7 +60,7 @@ function Main() {
 
   function updateEditingText(index, id) {
     const newTodos = [...todos];
-    if (!editingTexts[id]) {
+    if (editingTexts[id] ==="") {
       setError("Aldaa");
     } else {
       newTodos[index].text = editingTexts[id];
