@@ -1,14 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import Main from "./components/main";
-import NavbarItem from "./components/navbar";
-// import { Navbar } from "react-bootstrap";
-// import Admin from "./admin";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ClientApp } from "./components/client/ClientApp";
+import { AdminApp } from "./components/admin/AdminApp";
 
 function App() {
   return (
     <>
-      <NavbarItem />
-      <Main />
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<ClientApp />}></Route>
+          <Route path="/admin/*" element={<AdminApp />}></Route>
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
