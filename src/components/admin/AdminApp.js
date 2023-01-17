@@ -1,20 +1,17 @@
 import NavbarItem from "../navbar";
-import Main from "../todoMain";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { TodoNew } from "../todoNew";
-import { TodoList } from "../todoList";
+import { Route, Routes } from "react-router-dom";
+import MainTodo from "../todoMain";
+// import { TodoNew } from "../todoNew";
+// import { TodoList } from "../todoList";
 export function AdminApp() {
   return (
     <>
       <NavbarItem />
-
-      <BrowserRouter>
+      <div style={{ maxWidth: 700, margin: "2rem auto" }}>
         <Routes>
-          <Route path="/" element={<h1>welcome to admin page</h1>}></Route>
-          <Route path="/todonew" element={<TodoNew />}></Route>
-          <Route path="/todolist" element={<TodoList />}></Route>
+          <Route path="/todo" element={<MainTodo />}></Route>
         </Routes>
-      </BrowserRouter>
+      </div>
     </>
   );
 }

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TodoNew } from "./todoNew";
 import { TodoList } from "./todoList";
+import { toast } from "react-toastify";
 
-function Main() {
+function MainTodo() {
   let [todos, setTodos] = useState([]);
   let [editingTexts, setEditingTexts] = useState({});
   let [error, setError] = useState("");
@@ -43,7 +44,7 @@ function Main() {
     const newEditingTexts = { ...editingTexts };
     newEditingTexts[id] = todos[index].text;
     setEditingTexts(newEditingTexts);
-     setError("")
+    setError("");
   }
 
   function handleEditingText(id, e) {
@@ -60,12 +61,22 @@ function Main() {
 
   function updateEditingText(index, id) {
     const newTodos = [...todos];
-    if (editingTexts[id] ==="") {
+    if (editingTexts[id] === "") {
       setError("Aldaa");
     } else {
       newTodos[index].text = editingTexts[id];
       setTodos(newTodos);
       cancelEditingText(id);
+      toast.success("Амжилттай засагдлаа", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
 
@@ -92,4 +103,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default MainTodo;

@@ -3,6 +3,9 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ClientApp } from "./components/client/ClientApp";
 import { AdminApp } from "./components/admin/AdminApp";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <>
@@ -11,6 +14,18 @@ function App() {
           <Route path="*" element={<ClientApp />}></Route>
           <Route path="/admin/*" element={<AdminApp />}></Route>
         </Routes>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </BrowserRouter>
     </>
   );

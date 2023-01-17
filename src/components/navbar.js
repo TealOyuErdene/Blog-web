@@ -2,8 +2,8 @@ import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import { AwesomeButton } from "react-awesome-button";
+import { Link } from "react-router-dom";
 import "react-awesome-button/dist/styles.css";
 
 function NavbarItem() {
@@ -11,7 +11,9 @@ function NavbarItem() {
     <>
       <Navbar expand="lg" bg="dark" variant="dark">
         <Container fluid>
-          <Navbar.Brand href="#">Админ</Navbar.Brand>
+          <Navbar.Brand to="/admin" as={Link}>
+            Админ
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -19,18 +21,10 @@ function NavbarItem() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="#action1">Хэрэглэгч</Nav.Link>
-              <Nav.Link href="#action2">Ангилал</Nav.Link>
-              <NavDropdown title="Мэдээ" id="navbarScrollingDropdown">
-                <NavDropdown.Item href="#action3">Мэдээ</NavDropdown.Item>
-                <NavDropdown.Item href="#action4"> Сэтгэгдэл</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action5">Шинэ мэдээ</NavDropdown.Item>
-              </NavDropdown>
-              <Nav.Link href="#" disabled>
-                {" "}
-                Сэдэв
+              <Nav.Link to="/admin/todo" as={Link}>
+                Ангилал
               </Nav.Link>
+              <Nav.Link>Мэдээ</Nav.Link>
             </Nav>
             <Form className="d-flex">
               <AwesomeButton type="danger">Гарах</AwesomeButton>

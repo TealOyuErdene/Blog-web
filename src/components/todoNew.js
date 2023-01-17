@@ -4,6 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 export function TodoNew({ onSave }) {
   const [show, setShow] = useState(false);
@@ -25,6 +26,16 @@ export function TodoNew({ onSave }) {
       setText("");
       setError("");
       setShow(false);
+      toast.success("Амжилттай нэмэгдлээ", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
 
