@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { AwesomeButton } from "react-awesome-button";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "react-awesome-button/dist/styles.css";
 
 function NavbarItem() {
@@ -21,7 +21,13 @@ function NavbarItem() {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link to="/admin/todo" as={Link}>
+              <Nav.Link
+                to="/admin/todo"
+                as={NavLink}
+                style={({ isActive }) => ({
+                  color: isActive ? "black" : "none",
+                })}
+              >
                 Ангилал
               </Nav.Link>
               <Nav.Link>Мэдээ</Nav.Link>
