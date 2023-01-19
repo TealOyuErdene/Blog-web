@@ -1,6 +1,6 @@
-import NavbarItem from "../navbar";
+import NavbarItem from "./navbar";
 import { Route, Routes } from "react-router-dom";
-import MainTodo from "../todoMain";
+import MainTodo from "./todoMain";
 // import { TodoNew } from "../todoNew";
 // import { TodoList } from "../todoList";
 export function AdminApp() {
