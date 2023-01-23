@@ -9,7 +9,7 @@ export function AdminApp() {
       <div style={{ maxWidth: 700, margin: "2rem auto" }}>
         <Routes>
           <Route path="/todo" element={<MainTodo />}></Route>
-          <Route path="/news" element={<AddPost/>}></Route>
+          <Route path="/news" element={<AddPost />}></Route>
         </Routes>
       </div>
     </>

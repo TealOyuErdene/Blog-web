@@ -30,7 +30,9 @@ function NavbarItem() {
               >
                 Ангилал
               </Nav.Link>
-              <Nav.Link>Мэдээ</Nav.Link>
+              <Nav.Link to="/admin/news" as={NavLink}>
+                Мэдээ
+              </Nav.Link>
             </Nav>
             <Form className="d-flex">
               <AwesomeButton type="danger">Гарах</AwesomeButton>

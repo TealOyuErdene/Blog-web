@@ -51,7 +51,8 @@ export function TodoNew({ onSave }) {
         <h1>Ангилал</h1>
         <AwesomeButton
           style={{ marginLeft: "340px" }}
-          className="outline-primary  mt-2"
+          className="mt-2"
+          type="primary"
           onPress={handleShow}
         >
           Шинэ
