@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 export function Addnews() {
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Img variant="top" src="./software engineer.jpeg" />
+      <Card.Img variant="top" src="./software-engineer.jpeg" />
       <Card.Body>
         <Card.Title>
           20 Lessons Learned in 20 Years: Insights from a Seasoned Software

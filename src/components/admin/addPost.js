@@ -2,19 +2,13 @@ import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
+import { UploadImage } from "./uploadImage";
+import Button from "react-bootstrap/Button";
 
 export function AddPost() {
-  const [lgShow, setLgShow] = useState(false);
-  const [image, setImage] = useState();
-  function handleImage(e) {
-    let value = e.target.value;
-    console.log(value);
-
-    // const files = e.target.files[0].name;
-    setImage(value);
-    // console.log(image);
-  }
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   return (
     <>
@@ -24,36 +18,22 @@ export function AddPost() {
           style={{ marginLeft: "340px" }}
           type="primary"
           className="mt-2"
-          onPress={() => setLgShow(true)}
+          onPress={handleShow}
         >
           Нэмэх
         </AwesomeButton>
-        <div style={{ margin: "50px" }}>
-          <img src={image} />
-        </div>
       </div>
 
-      <Modal
-        size="lg"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg">
-            Мэдээ нэмэх
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group
-            controlId="formFile"
-            className="mb-3"
-            encType="multipart/form-data"
-          >
-            <Form.Label>Зургаа оруулах хэсэг</Form.Label>
-            <Form.Control type="file" onChange={handleImage} />
-          </Form.Group>
-        </Modal.Body>
+      <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Body>{<UploadImage />}</Modal.Body>
+        <Modal.Footer className="border-top-0">
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
       </Modal>
     </>
   );
