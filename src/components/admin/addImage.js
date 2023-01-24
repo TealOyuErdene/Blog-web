@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import React from "react";
 import ImageUploading from "react-images-uploading";
 
-export function newsImage() {
+export function NewsImage() {
   const [images, setImages] = React.useState([]);
   const maxNumber = 69;
 

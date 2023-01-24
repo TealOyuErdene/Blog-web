@@ -1,11 +1,20 @@
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 
 export function AddPost() {
   const [lgShow, setLgShow] = useState(false);
+  const [image, setImage] = useState();
+  function handleImage(e) {
+    let value = e.target.value;
+    console.log(value);
+
+    // const files = e.target.files[0].name;
+    setImage(value);
+    // console.log(image);
+  }
 
   return (
     <>
@@ -19,6 +28,9 @@ export function AddPost() {
         >
           Нэмэх
         </AwesomeButton>
+        <div style={{ margin: "50px" }}>
+          <img src={image} />
+        </div>
       </div>
 
       <Modal
@@ -29,10 +41,19 @@ export function AddPost() {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">
-            Large Modal
+            Мэдээ нэмэх
           </Modal.Title>
         </Modal.Header>
-        <Modal.Body>...</Modal.Body>
+        <Modal.Body>
+          <Form.Group
+            controlId="formFile"
+            className="mb-3"
+            encType="multipart/form-data"
+          >
+            <Form.Label>Зургаа оруулах хэсэг</Form.Label>
+            <Form.Control type="file" onChange={handleImage} />
+          </Form.Group>
+        </Modal.Body>
       </Modal>
     </>
   );
