@@ -2,6 +2,7 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
+// import React, { useEffect, useState } from "react";
 export function TodoList({
   todos,
   editingTexts,
@@ -13,6 +14,12 @@ export function TodoList({
   handleEditingText,
   error,
 }) {
+  // const [list, setList] = useState([]);
+  // useEffect(() => {
+  //   fetch("https://dummyjson.com/products")
+  //     .then((req) => req.json())
+  //     .then((data) => setList(data.products));
+  // }, []);
   return (
     <>
       <ul style={{ paddingLeft: "0px" }}>
