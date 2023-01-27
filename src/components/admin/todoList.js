@@ -2,7 +2,9 @@ import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
-// import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
 export function TodoList({
   todos,
   editingTexts,
@@ -10,20 +12,26 @@ export function TodoList({
   updateEditingText,
   handleDoneChange,
   editTodoInline,
-  handleDelete,
   handleEditingText,
   error,
+  list,
+  loadCategory,
 }) {
-  // const [list, setList] = useState([]);
-  // useEffect(() => {
-  //   fetch("https://dummyjson.com/products")
-  //     .then((req) => req.json())
-  //     .then((data) => setList(data.products));
-  // }, []);
+  function handleDelete(id) {
+    if (window.confirm("Устгах уу")) {
+      axios.delete(`http://localhost:8000/categories/${id}`).then((res) => {
+        const { status } = res;
+        if (status === 200) {
+          loadCategory();
+        }
+      });
+    }
+  }
+
   return (
     <>
       <ul style={{ paddingLeft: "0px" }}>
-        {todos.map((todo, index1) => {
+        {list.map((todo, index1) => {
           return (
             <div key={todo.id}>
               {editingTexts[todo.id] !== undefined ? (
@@ -81,7 +89,7 @@ function NormalItem({
             fontSize: "20px",
           }}
         >
-          {todo.text}
+          {todo.name}
         </Card.Body>
       </Card>
       {!todo.done && (
@@ -96,7 +104,7 @@ function NormalItem({
       <Button
         variant="outline-secondary mt-2 me-2 border-0"
         style={{ height: "35px" }}
-        onClick={() => handleDelete(index1)}
+        onClick={() => handleDelete(todo.id)}
       >
         Устгах
       </Button>

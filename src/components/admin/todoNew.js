@@ -3,10 +3,11 @@ import "react-awesome-button/dist/styles.css";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
 
-export function TodoNew({ onSave }) {
+export function TodoNew({ onSave, loadCategory }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -45,6 +46,27 @@ export function TodoNew({ onSave }) {
     }
   }
 
+  // const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+
+  function handleSave() {
+    // setLoading(true);
+
+    axios
+      .post("http://localhost:8000/categories", {
+        name: name,
+      })
+      .then((res) => {
+        const { status } = res;
+        if (status === 201) {
+          loadCategory();
+          handleClose();
+          // setLoading(false);
+          setName("");
+        }
+      });
+  }
+
   return (
     <>
       <div className="d-flex mb-4">
@@ -70,18 +92,28 @@ export function TodoNew({ onSave }) {
               type="text"
               placeholder="Ангиллын нэр"
               autoFocus
-              value={text}
-              onChange={handleTextChange}
+              value={name}
+              // disabled={loading}
+              onChange={(e) => setName(e.target.value)}
               onKeyUp={handleKeyUp}
               style={{ borderColor: error ? "red" : "none" }}
             />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="outline-danger me-auto" onClick={handleClose}>
+          <Button
+            variant="outline-danger me-auto"
+            // disabled={loading}
+            onClick={handleClose}
+          >
             Устгах
           </Button>
-          <Button variant="primary" onClick={handleSave}>
+          <Button
+            variant="primary"
+            loading
+            // disabled={loading}
+            onClick={handleSave}
+          >
             Хадгалах
           </Button>
         </Modal.Footer>

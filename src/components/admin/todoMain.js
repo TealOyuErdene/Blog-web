@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { TodoNew } from "./todoNew";
 import { TodoList } from "./todoList";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 function MainTodo() {
   let [todos, setTodos] = useState([]);
   let [editingTexts, setEditingTexts] = useState({});
   let [error, setError] = useState("");
+
+  const [list, setList] = useState([]);
+  function loadCategory() {
+    axios.get(" http://localhost:8000/categories").then((res) => {
+      const { data, status } = res;
+      if (status === 200) {
+        setList(data);
+      } else {
+        alert(`Error: ${status}`);
+      }
+    });
+  }
+
+  useEffect(() => {
+    loadCategory();
+  }, []);
 
   function handleSave(text) {
     let newTodo = {
@@ -16,14 +33,8 @@ function MainTodo() {
       id: uuidv4(),
     };
     let newTodos = [newTodo, ...todos];
-    setTodos(newTodos);
-  }
-  function handleDelete(bairlal) {
-    if (window.confirm("Устгах уу")) {
-      let newTodos = [...todos];
-      newTodos.splice(bairlal, 1);
-      setTodos(newTodos);
-    }
+    // setTodos(newTodos);
+    setList(newTodos);
   }
 
   function handleDoneChange(id) {
@@ -37,7 +48,8 @@ function MainTodo() {
       }
     }
     newTodos[index].done = !newTodos[index].done;
-    setTodos(newTodos);
+    // setTodos(newTodos);
+    setList(newTodos);
   }
 
   function editTodoInline(id, index) {
@@ -84,7 +96,7 @@ function MainTodo() {
     <>
       <div className="container">
         <div className="col-lg-6 mx-auto mt-5">
-          <TodoNew onSave={handleSave} />
+          <TodoNew onSave={handleSave} loadCategory={loadCategory} />
 
           <TodoList
             error={error}
@@ -94,8 +106,9 @@ function MainTodo() {
             updateEditingText={updateEditingText}
             handleDoneChange={handleDoneChange}
             editTodoInline={editTodoInline}
-            handleDelete={handleDelete}
             handleEditingText={handleEditingText}
+            loadCategory={loadCategory}
+            list={list}
           />
         </div>
       </div>
