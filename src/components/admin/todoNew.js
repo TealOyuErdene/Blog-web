@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Spinner from "react-bootstrap/Spinner";
 
 export function TodoNew({ onSave, loadCategory }) {
   const [show, setShow] = useState(false);
@@ -14,31 +15,7 @@ export function TodoNew({ onSave, loadCategory }) {
 
   let [text, setText] = useState("");
   let [error, setError] = useState("");
-
-  function handleTextChange(e) {
-    setText(e.target.value);
-  }
-
-  function handleSave() {
-    if (text === "") {
-      setError("Утга бичнэ үү.");
-    } else {
-      onSave(text);
-      setText("");
-      setError("");
-      setShow(false);
-      toast.success("Амжилттай нэмэгдлээ", {
-        position: "bottom-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-    }
-  }
+  const [loading, setLoading] = useState(false);
 
   function handleKeyUp(e) {
     if (e.code === "Enter") {
@@ -46,25 +23,36 @@ export function TodoNew({ onSave, loadCategory }) {
     }
   }
 
-  // const [loading, setLoading] = useState(false);
-  const [name, setName] = useState("");
-
   function handleSave() {
-    // setLoading(true);
-
-    axios
-      .post("http://localhost:8000/categories", {
-        name: name,
-      })
-      .then((res) => {
-        const { status } = res;
-        if (status === 201) {
-          loadCategory();
-          handleClose();
-          // setLoading(false);
-          setName("");
-        }
-      });
+    if (text === "") {
+      setError("Утга бичнэ үү.");
+    } else {
+      setLoading(true);
+      axios
+        .post("http://localhost:8000/categories", {
+          name: text,
+        })
+        .then((res) => {
+          const { status } = res;
+          if (status === 201) {
+            loadCategory();
+            handleClose();
+            setLoading(false);
+            setText("");
+            setError("");
+            toast.success("Амжилттай нэмэгдлээ", {
+              position: "bottom-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+        });
+    }
   }
 
   return (
@@ -92,30 +80,45 @@ export function TodoNew({ onSave, loadCategory }) {
               type="text"
               placeholder="Ангиллын нэр"
               autoFocus
-              value={name}
-              // disabled={loading}
-              onChange={(e) => setName(e.target.value)}
+              value={text}
+              disabled={loading}
+              onChange={(e) => setText(e.target.value)}
               onKeyUp={handleKeyUp}
               style={{ borderColor: error ? "red" : "none" }}
             />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            variant="outline-danger me-auto"
-            // disabled={loading}
-            onClick={handleClose}
-          >
-            Устгах
-          </Button>
-          <Button
-            variant="primary"
-            loading
-            // disabled={loading}
-            onClick={handleSave}
-          >
-            Хадгалах
-          </Button>
+          {loading ? (
+            <Button variant="primary" disabled>
+              <Spinner
+                as="span"
+                animation="grow"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />
+              Loading...
+            </Button>
+          ) : (
+            <>
+              <Button
+                variant="outline-danger me-auto"
+                disabled={loading}
+                onClick={handleClose}
+              >
+                Устгах
+              </Button>
+              <Button
+                variant="primary"
+                loading
+                disabled={loading}
+                onClick={handleSave}
+              >
+                Хадгалах
+              </Button>
+            </>
+          )}
         </Modal.Footer>
       </Modal>
     </>

@@ -57,6 +57,8 @@ function MainTodo() {
     newEditingTexts[id] = todos[index].text;
     setEditingTexts(newEditingTexts);
     setError("");
+
+    //zasah heseg
   }
 
   function handleEditingText(id, e) {
