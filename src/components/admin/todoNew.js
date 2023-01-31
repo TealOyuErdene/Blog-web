@@ -8,14 +8,18 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 
-export function TodoNew({ onSave, loadCategory }) {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
+export function TodoNew({
+  onSave,
+  loadCategory,
+  editingId,
+  onClose,
+  onShow,
+  show,
+}) {
   let [text, setText] = useState("");
-  let [error, setError] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
 
   function handleKeyUp(e) {
     if (e.code === "Enter") {
@@ -23,35 +27,75 @@ export function TodoNew({ onSave, loadCategory }) {
     }
   }
 
+  useEffect(() => {
+    if (editingId) {
+      axios
+        .get(` http://localhost:8000/categories/${editingId}`)
+        .then((res) => {
+          const { data, status } = res;
+          if (status === 200) {
+            setName(data.name);
+          } else {
+            alert(`Error: ${status}`);
+          }
+        });
+    }
+  }, [editingId]);
+
   function handleSave() {
     if (text === "") {
       setError("Утга бичнэ үү.");
     } else {
       setLoading(true);
-      axios
-        .post("http://localhost:8000/categories", {
-          name: text,
-        })
-        .then((res) => {
-          const { status } = res;
-          if (status === 201) {
-            loadCategory();
-            handleClose();
-            setLoading(false);
-            setText("");
-            setError("");
-            toast.success("Амжилттай нэмэгдлээ", {
-              position: "bottom-right",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            });
-          }
-        });
+      if (editingId === "new") {
+        axios
+          .post("http://localhost:8000/categories", {
+            name: text,
+          })
+          .then((res) => {
+            const { status } = res;
+            if (status === 201) {
+              loadCategory();
+              onClose();
+              setLoading(false);
+              setText("");
+              setError("");
+              toast.success("Амжилттай нэмэгдлээ", {
+                position: "bottom-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            }
+          });
+      } else {
+        axios
+          .put(`http://localhost:8000/categories/${editingId}`, { name: text })
+          .then((res) => {
+            const { status } = res;
+            if (status === 200) {
+              loadCategory();
+              onClose();
+              setText("");
+              setLoading(false);
+              setError("");
+              toast.success("Амжилттай засагдлаа", {
+                position: "bottom-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            }
+          });
+      }
     }
   }
 
@@ -63,13 +107,14 @@ export function TodoNew({ onSave, loadCategory }) {
           style={{ marginLeft: "340px" }}
           className="mt-2"
           type="primary"
-          onPress={handleShow}
+          onPress={onShow}
+          // onPress={() => setSearchParams({ editing: "new" })}
         >
           Шинэ
         </AwesomeButton>
       </div>
 
-      <Modal show={show} onHide={handleClose} animation={false}>
+      <Modal show={show} onHide={onClose} animation={true}>
         <Modal.Header closeButton>
           <Modal.Title>Ангилал нэмэх</Modal.Title>
         </Modal.Header>
@@ -105,7 +150,7 @@ export function TodoNew({ onSave, loadCategory }) {
               <Button
                 variant="outline-danger me-auto"
                 disabled={loading}
-                onClick={handleClose}
+                onClick={onClose}
               >
                 Устгах
               </Button>

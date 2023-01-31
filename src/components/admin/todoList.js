@@ -4,9 +4,9 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 
 export function TodoList({
-  todos,
   editingTexts,
   cancelEditingText,
   updateEditingText,
@@ -16,6 +16,7 @@ export function TodoList({
   error,
   list,
   loadCategory,
+  editingId,
 }) {
   function handleDelete(id) {
     if (window.confirm("Устгах уу")) {
@@ -53,7 +54,6 @@ export function TodoList({
                     handleDoneChange={handleDoneChange}
                     editTodoInline={editTodoInline}
                     todo={todo}
-                    index1={index1}
                   />
                 </div>
               )}
@@ -65,13 +65,9 @@ export function TodoList({
   );
 }
 
-function NormalItem({
-  handleDoneChange,
-  editTodoInline,
-  handleDelete,
-  todo,
-  index1,
-}) {
+function NormalItem({ handleDoneChange, handleDelete, todo }) {
+  const [searchParams, setSearchParams] = useSearchParams({});
+
   return (
     <>
       <Card
@@ -96,7 +92,8 @@ function NormalItem({
         <Button
           variant="outline-secondary mt-2 mx-3 border-0"
           style={{ height: "35px" }}
-          onClick={() => editTodoInline(todo.id, index1)}
+          // onClick={() => editTodoInline(todo.id, index1)}
+          onClick={() => setSearchParams({ editing: todo.id })}
         >
           Засах
         </Button>
@@ -124,6 +121,7 @@ function EditingItem({
   return (
     <>
       <Card
+        key={todo.id}
         className="d-flex flex-row gap-3 mb-4"
         style={{ border: "none", width: "610px", height: "64px" }}
       >
