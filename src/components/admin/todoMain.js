@@ -4,11 +4,28 @@ import { TodoNew } from "./todoNew";
 import { TodoList } from "./todoList";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 
 function MainTodo() {
   let [todos, setTodos] = useState([]);
   let [editingTexts, setEditingTexts] = useState({});
   let [error, setError] = useState("");
+
+  const [searchParams, setSearchParams] = useSearchParams({});
+  const editing = searchParams.get("editing");
+
+  const [show, setShow] = useState(searchParams.get("editing") === "new");
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  function onShow() {
+    setSearchParams({ editing: "new" });
+    handleShow();
+  }
+
+  function onClose() {
+    setSearchParams({});
+    handleClose();
+  }
 
   const [list, setList] = useState([]);
   function loadCategory() {
@@ -98,7 +115,14 @@ function MainTodo() {
     <>
       <div className="container">
         <div className="col-lg-6 mx-auto mt-5">
-          <TodoNew onSave={handleSave} loadCategory={loadCategory} />
+          <TodoNew
+            onSave={handleSave}
+            loadCategory={loadCategory}
+            editingId={editing}
+            onClose={onClose}
+            onShow={onShow}
+            show={show}
+          />
 
           <TodoList
             error={error}
@@ -111,6 +135,7 @@ function MainTodo() {
             handleEditingText={handleEditingText}
             loadCategory={loadCategory}
             list={list}
+            editingId={editing}
           />
         </div>
       </div>
