@@ -13,8 +13,6 @@ export function TodoNew({ loadCategory, editingId, onClose, onShow, show }) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
-  const [query, setQuery] = useState("");
-  const [list, setList] = useState("");
   console.log(query);
 
   function handleKeyUp(e) {

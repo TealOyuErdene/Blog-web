@@ -7,16 +7,18 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 
 function MainTodo() {
-  let [todos, setTodos] = useState([]);
-  let [editingTexts, setEditingTexts] = useState({});
-  let [error, setError] = useState("");
-
+  const [todos, setTodos] = useState([]);
+  const [editingTexts, setEditingTexts] = useState({});
+  const [error, setError] = useState("");
+  const [list, setList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams({});
   const editing = searchParams.get("editing");
+  const [query, setQuery] = useState("");
 
   const [show, setShow] = useState(searchParams.get("editing") === "new");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   function onCreate() {
     setSearchParams({ editing: "new" });
     handleShow();
@@ -32,9 +34,8 @@ function MainTodo() {
     handleClose();
   }
 
-  const [list, setList] = useState([]);
-  function loadCategory() {
-    axios.get(" http://localhost:8000/categories").then((res) => {
+  function loadCategory(query = "") {
+    axios.get(`http://localhost:8000/categories?q={query}`).then((res) => {
       const { data, status } = res;
       if (status === 200) {
         setList(data);
