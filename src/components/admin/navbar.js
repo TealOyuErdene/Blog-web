@@ -30,7 +30,7 @@ function NavbarItem() {
               >
                 Ангилал
               </Nav.Link>
-              <Nav.Link to="/admin/news" as={NavLink}>
+              <Nav.Link to="/admin/articles" as={NavLink}>
                 Мэдээ
               </Nav.Link>
             </Nav>

@@ -1,8 +1,9 @@
 import NavbarItem from "./navbar";
 import { Route, Routes } from "react-router-dom";
 import MainTodo from "./todoMain";
-import { AddPost } from "./addPost";
 import { Test } from "./test";
+import { ArticlesNew } from "./articlesNew";
+import { Articles } from "./articles";
 
 export function AdminApp() {
   return (
@@ -10,9 +11,10 @@ export function AdminApp() {
       <NavbarItem />
       <div style={{ maxWidth: 700, margin: "2rem auto" }}>
         <Routes>
-          <Route path="/todo" element={<MainTodo />}></Route>
-          <Route path="/news" element={<AddPost />}></Route>
-          <Route path="/test" element={<Test />}></Route>
+          <Route path="/todo" element={<MainTodo />} />
+          <Route path="/articles" element={<Articles />} />
+          <Route path="/articles/new" element={<ArticlesNew />} />
+          <Route path="/test" element={<Test />} />
         </Routes>
       </div>
     </>

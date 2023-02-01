@@ -8,12 +8,20 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 
-export function TodoNew({ loadCategory, editingId, onClose, onShow, show }) {
+export function TodoNew({
+  loadCategory,
+  editingId,
+  onClose,
+  onShow,
+  show,
+  query,
+  setQuery,
+  list,
+}) {
   let [text, setText] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
-  console.log(query);
 
   function handleKeyUp(e) {
     if (e.code === "Enter") {
@@ -93,27 +101,23 @@ export function TodoNew({ loadCategory, editingId, onClose, onShow, show }) {
     }
   }
 
+  if (list.length === 0) {
+    return <h1>Ийм үр дүн олдсонгүй</h1>;
+  }
+
   return (
     <>
-      <div className="d-flex mb-2">
-        <h1>Ангилал</h1>
-        <AwesomeButton
-          style={{ marginLeft: "340px" }}
-          className="mt-2"
-          type="primary"
-          onPress={onShow}
-        >
-          Шинэ
+      <div className="d-flex justify-content-between mb-5">
+        <Form.Control
+          style={{ width: "12rem" }}
+          value={query}
+          placeholder="Ангилал хайх"
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <AwesomeButton  type="primary" onPress={onShow}>
+          Ангилал нэмэх
         </AwesomeButton>
       </div>
-
-      <Form.Control
-        className="mb-4"
-        style={{ width: "10rem" }}
-        value={query}
-        placeholder="Ангилал хайх"
-        onChange={(e) => setQuery(e.target.value)}
-      />
 
       <Modal show={show} onHide={onClose} animation={true}>
         <Modal.Header closeButton>

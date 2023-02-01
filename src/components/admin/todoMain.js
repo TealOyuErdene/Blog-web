@@ -5,6 +5,7 @@ import { TodoList } from "./todoList";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
+import { useDebounce } from "use-debounce";
 
 function MainTodo() {
   const [todos, setTodos] = useState([]);
@@ -14,6 +15,7 @@ function MainTodo() {
   const [searchParams, setSearchParams] = useSearchParams({});
   const editing = searchParams.get("editing");
   const [query, setQuery] = useState("");
+  const [searchedQuery] = useDebounce(query, 1000);
 
   const [show, setShow] = useState(searchParams.get("editing") === "new");
   const handleClose = () => setShow(false);
@@ -35,7 +37,7 @@ function MainTodo() {
   }
 
   function loadCategory(query = "") {
-    axios.get(`http://localhost:8000/categories?q={query}`).then((res) => {
+    axios.get(`http://localhost:8000/categories?q=${query}`).then((res) => {
       const { data, status } = res;
       if (status === 200) {
         setList(data);
@@ -44,6 +46,10 @@ function MainTodo() {
       }
     });
   }
+
+  useEffect(() => {
+    loadCategory(searchedQuery);
+  }, [searchedQuery]);
 
   useEffect(() => {
     loadCategory();
@@ -119,32 +125,33 @@ function MainTodo() {
 
   return (
     <>
-      <div className="container">
-        <div className="col-lg-6 mx-auto mt-5">
-          <TodoNew
-            onSave={handleSave}
-            loadCategory={loadCategory}
-            editingId={editing}
-            onClose={onClose}
-            onShow={onCreate}
-            show={show}
-          />
+      <div className="container" style={{ maxWidth: "580px" }}>
+        <TodoNew
+          onSave={handleSave}
+          loadCategory={loadCategory}
+          editingId={editing}
+          onClose={onClose}
+          onShow={onCreate}
+          show={show}
+          query={query}
+          setQuery={setQuery}
+          list={list}
+        />
 
-          <TodoList
-            error={error}
-            todos={todos}
-            editingTexts={editingTexts}
-            cancelEditingText={cancelEditingText}
-            updateEditingText={updateEditingText}
-            handleDoneChange={handleDoneChange}
-            editTodoInline={editTodoInline}
-            handleEditingText={handleEditingText}
-            loadCategory={loadCategory}
-            list={list}
-            editingId={editing}
-            onEdit={onEdit}
-          />
-        </div>
+        <TodoList
+          error={error}
+          todos={todos}
+          editingTexts={editingTexts}
+          cancelEditingText={cancelEditingText}
+          updateEditingText={updateEditingText}
+          handleDoneChange={handleDoneChange}
+          editTodoInline={editTodoInline}
+          handleEditingText={handleEditingText}
+          loadCategory={loadCategory}
+          list={list}
+          editingId={editing}
+          onEdit={onEdit}
+        />
       </div>
     </>
   );
