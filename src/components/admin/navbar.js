@@ -24,9 +24,9 @@ function NavbarItem() {
               <Nav.Link
                 to="/admin/todo"
                 as={NavLink}
-                style={({ isActive }) => ({
-                  color: isActive ? "black" : "none",
-                })}
+                // style={({ isActive }) => ({
+                //   color: isActive ? "black" : "none",
+                // })}
               >
                 Ангилал
               </Nav.Link>

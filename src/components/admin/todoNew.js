@@ -8,18 +8,14 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 
-export function TodoNew({
-  onSave,
-  loadCategory,
-  editingId,
-  onClose,
-  onShow,
-  show,
-}) {
+export function TodoNew({ loadCategory, editingId, onClose, onShow, show }) {
   let [text, setText] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
+  const [query, setQuery] = useState("");
+  const [list, setList] = useState("");
+  console.log(query);
 
   function handleKeyUp(e) {
     if (e.code === "Enter") {
@@ -28,7 +24,7 @@ export function TodoNew({
   }
 
   useEffect(() => {
-    if (editingId) {
+    if (editingId && editingId !== "new") {
       axios
         .get(` http://localhost:8000/categories/${editingId}`)
         .then((res) => {
@@ -43,7 +39,7 @@ export function TodoNew({
   }, [editingId]);
 
   function handleSave() {
-    if (text === "") {
+    if (text === {} || name === {}) {
       setError("Утга бичнэ үү.");
     } else {
       setLoading(true);
@@ -74,13 +70,13 @@ export function TodoNew({
           });
       } else {
         axios
-          .put(`http://localhost:8000/categories/${editingId}`, { name: text })
+          .put(`http://localhost:8000/categories/${editingId}`, { name: name })
           .then((res) => {
             const { status } = res;
             if (status === 200) {
               loadCategory();
               onClose();
-              setText("");
+              setName("");
               setLoading(false);
               setError("");
               toast.success("Амжилттай засагдлаа", {
@@ -101,36 +97,68 @@ export function TodoNew({
 
   return (
     <>
-      <div className="d-flex mb-4">
+      <div className="d-flex mb-2">
         <h1>Ангилал</h1>
         <AwesomeButton
           style={{ marginLeft: "340px" }}
           className="mt-2"
           type="primary"
           onPress={onShow}
-          // onPress={() => setSearchParams({ editing: "new" })}
         >
           Шинэ
         </AwesomeButton>
       </div>
 
+      <Form.Control
+        className="mb-4"
+        style={{ width: "10rem" }}
+        value={query}
+        placeholder="Ангилал хайх"
+        onChange={(e) => setQuery(e.target.value)}
+      />
+
       <Modal show={show} onHide={onClose} animation={true}>
         <Modal.Header closeButton>
-          <Modal.Title>Ангилал нэмэх</Modal.Title>
+          {editingId === "new" ? (
+            <>
+              <Modal.Title>Ангилал нэмэх</Modal.Title>
+            </>
+          ) : (
+            <>
+              <Modal.Title>Ангилал засах</Modal.Title>
+            </>
+          )}
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Нэр</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Ангиллын нэр"
-              autoFocus
-              value={text}
-              disabled={loading}
-              onChange={(e) => setText(e.target.value)}
-              onKeyUp={handleKeyUp}
-              style={{ borderColor: error ? "red" : "none" }}
-            />
+            {editingId === "new" ? (
+              <>
+                <Form.Control
+                  placeholder="Ангиллаа нэмнэ үү"
+                  type="text"
+                  autoFocus
+                  value={text}
+                  disabled={loading}
+                  onChange={(e) => setText(e.target.value)}
+                  onKeyUp={handleKeyUp}
+                  style={{ borderColor: error ? "red" : "none" }}
+                />
+              </>
+            ) : (
+              <>
+                <Form.Control
+                  placeholder="Ангиллаа засна уу"
+                  type="text"
+                  autoFocus
+                  value={name}
+                  disabled={loading}
+                  onChange={(e) => setName(e.target.value)}
+                  onKeyUp={handleKeyUp}
+                  style={{ borderColor: error ? "red" : "none" }}
+                />
+              </>
+            )}
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
@@ -147,19 +175,31 @@ export function TodoNew({
             </Button>
           ) : (
             <>
-              <Button
-                variant="outline-danger me-auto"
-                disabled={loading}
-                onClick={onClose}
-              >
-                Устгах
-              </Button>
-              <Button
-                variant="primary"
-                loading
-                disabled={loading}
-                onClick={handleSave}
-              >
+              {editingId === "new" ? (
+                <>
+                  {" "}
+                  <Button
+                    variant="outline-danger me-auto"
+                    disabled={loading}
+                    onClick={onClose}
+                  >
+                    Устгах
+                  </Button>
+                </>
+              ) : (
+                <>
+                  {" "}
+                  <Button
+                    variant="outline-danger me-auto"
+                    disabled={loading}
+                    onClick={onClose}
+                  >
+                    Болих
+                  </Button>
+                </>
+              )}
+
+              <Button variant="primary" disabled={loading} onClick={handleSave}>
                 Хадгалах
               </Button>
             </>

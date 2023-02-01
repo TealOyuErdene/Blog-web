@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { UploadImage } from "./uploadImage";
 import Button from "react-bootstrap/Button";
+import { AddNews } from "./addNews";
 
 export function AddPost() {
   const [show, setShow] = useState(false);
@@ -12,16 +13,20 @@ export function AddPost() {
 
   return (
     <>
-      <div className="d-flex mb-4">
-        <h1>Мэдээ</h1>
-        <AwesomeButton
-          style={{ marginLeft: "340px" }}
-          type="primary"
-          className="mt-2"
-          onPress={handleShow}
-        >
-          Нэмэх
-        </AwesomeButton>
+      <div className="container">
+        <div className="d-flex mb-4">
+          <h1>Мэдээ</h1>
+          <AwesomeButton
+            style={{ marginLeft: "340px" }}
+            type="primary"
+            className="mt-2"
+            onPress={handleShow}
+          >
+            Нэмэх
+          </AwesomeButton>
+        </div>
+
+        <AddNews />
       </div>
 
       <Modal show={show} onHide={handleClose} animation={false}>

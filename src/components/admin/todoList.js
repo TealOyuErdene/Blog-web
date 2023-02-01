@@ -17,6 +17,7 @@ export function TodoList({
   list,
   loadCategory,
   editingId,
+  onEdit,
 }) {
   function handleDelete(id) {
     if (window.confirm("Устгах уу")) {
@@ -54,6 +55,7 @@ export function TodoList({
                     handleDoneChange={handleDoneChange}
                     editTodoInline={editTodoInline}
                     todo={todo}
+                    onEdit={onEdit}
                   />
                 </div>
               )}
@@ -65,9 +67,7 @@ export function TodoList({
   );
 }
 
-function NormalItem({ handleDoneChange, handleDelete, todo }) {
-  const [searchParams, setSearchParams] = useSearchParams({});
-
+function NormalItem({ handleDoneChange, handleDelete, todo, onEdit }) {
   return (
     <>
       <Card
@@ -93,7 +93,7 @@ function NormalItem({ handleDoneChange, handleDelete, todo }) {
           variant="outline-secondary mt-2 mx-3 border-0"
           style={{ height: "35px" }}
           // onClick={() => editTodoInline(todo.id, index1)}
-          onClick={() => setSearchParams({ editing: todo.id })}
+          onClick={() => onEdit(todo.id)}
         >
           Засах
         </Button>

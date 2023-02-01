@@ -17,8 +17,13 @@ function MainTodo() {
   const [show, setShow] = useState(searchParams.get("editing") === "new");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  function onShow() {
+  function onCreate() {
     setSearchParams({ editing: "new" });
+    handleShow();
+  }
+
+  function onEdit(id) {
+    setSearchParams({ editing: id });
     handleShow();
   }
 
@@ -120,7 +125,7 @@ function MainTodo() {
             loadCategory={loadCategory}
             editingId={editing}
             onClose={onClose}
-            onShow={onShow}
+            onShow={onCreate}
             show={show}
           />
 
@@ -136,6 +141,7 @@ function MainTodo() {
             loadCategory={loadCategory}
             list={list}
             editingId={editing}
+            onEdit={onEdit}
           />
         </div>
       </div>
