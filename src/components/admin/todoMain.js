@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { TodoNew } from "./todoNew";
 import { TodoList } from "./todoList";
 import axios from "axios";
@@ -7,9 +6,6 @@ import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 
 function MainTodo() {
-  const [todos, setTodos] = useState([]);
-  const [editingTexts, setEditingTexts] = useState({});
-  const [error, setError] = useState("");
   const [list, setList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams({});
   const editing = searchParams.get("editing");
@@ -69,8 +65,6 @@ function MainTodo() {
         />
 
         <TodoList
-          todos={todos}
-          editingTexts={editingTexts}
           loadCategory={loadCategory}
           list={list}
           editingId={editing}
