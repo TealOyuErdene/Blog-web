@@ -5,8 +5,8 @@ import "react-awesome-button/dist/styles.css";
 import Modal from "react-bootstrap/Modal";
 import { UploadImage } from "./uploadImage";
 import Button from "react-bootstrap/Button";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
+import { CategoriesSelector } from "./categoriesSelector";
 
 export function ArticlesNew() {
   const [show, setShow] = useState(false);
@@ -14,18 +14,7 @@ export function ArticlesNew() {
   const handleShow = () => setShow(true);
 
   const [text, setText] = useState("");
-  const [categories, setCategories] = useState("");
-
-  useEffect(() => {
-    axios.get(`http://localhost:8000/categories`).then((res) => {
-      const { data, status } = res;
-      if (status === 200) {
-        setCategories(data);
-      } else {
-        alert(`Error: ${status}`);
-      }
-    });
-  }, []);
+  const [categoryId, setCategoryId] = useState("");
 
   return (
     <>
@@ -36,12 +25,10 @@ export function ArticlesNew() {
           </AwesomeButton>
         </div>
 
-        <select value={value} onChange={(e)=> onchange(e.target.value)}>
-          <option value="">Ангилалгүй</option>
-          {categories.map((category)=> (
-            <option key={category.id} value={category.id}>{category.name}</option>
-          ))}
-        </select>
+        <CategoriesSelector
+          value={categoryId}
+          onChange={(val) => setCategoryId(val)}
+        />
 
         <CKEditor
           editor={ClassicEditor}

@@ -11,7 +11,7 @@ export function AdminApp() {
       <NavbarItem />
       <div style={{ maxWidth: 700, margin: "2rem auto" }}>
         <Routes>
-          <Route path="/todo" element={<MainTodo />} />
+          <Route path="/categories" element={<MainTodo />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/new" element={<ArticlesNew />} />
           <Route path="/test" element={<Test />} />

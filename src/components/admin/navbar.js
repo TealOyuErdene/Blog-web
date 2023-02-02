@@ -22,7 +22,7 @@ function NavbarItem() {
               navbarScroll
             >
               <Nav.Link
-                to="/admin/todo"
+                to="/admin/categories"
                 as={NavLink}
                 // style={({ isActive }) => ({
                 //   color: isActive ? "black" : "none",
