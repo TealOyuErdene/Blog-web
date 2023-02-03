@@ -7,7 +7,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
-import img1 from "./admin-image/404-not-found.gif";
+import img1 from "../../Images/404-not-found.gif";
 export function TodoNew({
   loadCategory,
   editingId,
@@ -110,10 +110,10 @@ export function TodoNew({
           placeholder="Ангилал хайх"
           onChange={(e) => setQuery(e.target.value)}
         />
-        <div className="d-flex flex-column align-items-center mt-5">
+        <div className="d-flex flex-column align-items-center">
           <img style={{ width: "50%" }} src={img1} />
-          <h6 className="mt-5">
-            "<b>{query}</b>" түлхүүрт илэрц олдсонгүй...
+          <h6 className="mt-5 ">
+            "<b>{query}</b>"" түлхүүрт илэрц олдсонгүй...
           </h6>
         </div>
       </>

@@ -6,7 +6,7 @@ import { AwesomeButton } from "react-awesome-button";
 import { Link, NavLink } from "react-router-dom";
 import "react-awesome-button/dist/styles.css";
 
-function NavbarItem() {
+function NavbarAdmin() {
   return (
     <>
       <Navbar expand="lg" bg="dark" variant="dark">
@@ -43,4 +43,4 @@ function NavbarItem() {
     </>
   );
 }
-export default NavbarItem;
+export default NavbarAdmin;

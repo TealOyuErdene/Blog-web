@@ -1,4 +1,4 @@
-import NavbarItem from "./navbar";
+import NavbarAdmin from "./navbarAdmin";
 import { Route, Routes } from "react-router-dom";
 import MainTodo from "./todoMain";
 import { Test } from "./test";
@@ -8,7 +8,7 @@ import { Articles } from "./articles";
 export function AdminApp() {
   return (
     <>
-      <NavbarItem />
+      <NavbarAdmin />
       <div style={{ maxWidth: 700, margin: "2rem auto" }}>
         <Routes>
           <Route path="/categories" element={<MainTodo />} />

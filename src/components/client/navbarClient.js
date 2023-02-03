@@ -1,4 +1,18 @@
-export function NavbarMain() {
+import { useEffect, useState } from "react";
+import axios from "axios";
+export function NavbarClient() {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:8000/categories`).then((res) => {
+      const { data, status } = res;
+      if (status === 200) {
+        setCategories(data);
+      } else {
+        alert(`Error: ${status}`);
+      }
+    });
+  });
+
   return (
     <>
       <div className="container">
@@ -39,54 +53,11 @@ export function NavbarMain() {
 
         <div className="nav-scroller py-1 mb-2">
           <nav className="nav d-flex justify-content-between">
-            <a class="p-2 link-secondary news-categories" href="/politics">
-              Улс төр
-            </a>
-            <a className="p-2 link-secondary news-categories" href="/economy">
-              Эдийн засаг
-            </a>
-
-            <a
-              className="p-2 link-secondary news-categories"
-              href="/technology"
-            >
-              Технологи
-            </a>
-
-            <a className="p-2 link-secondary news-categories" href="/education">
-              Боловсрол
-            </a>
-
-            <a className="p-2 link-secondary news-categories" href="/society">
-              Нийгэм
-            </a>
-
-            <a className="p-2 link-secondary news-categories" href="/business">
-              Бизнес
-            </a>
-
-            <a className="p-2 link-secondary news-categories" href="/science">
-              Шинжлэх ухаан
-            </a>
-
-            <a className="p-2 link-secondary news-categories" href="/health">
-              Эрүүл мэнд
-            </a>
-
-            <a className="p-2 link-secondary news-categories" href="/word">
-              Гадаад мэдээ
-            </a>
-
-            <a
-              className="p-2 link-secondary news-categories"
-              href="entertainment"
-            >
-              Соёл урлаг
-            </a>
-
-            <a className="p-2 link-secondary news-categories" href="sport">
-              Спорт
-            </a>
+            {categories.map((category) => (
+              <a class="p-2 link-secondary news-categories" key={category.id}>
+                {category.name}
+              </a>
+            ))}
           </nav>
         </div>
       </div>

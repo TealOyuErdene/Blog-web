@@ -1,12 +1,19 @@
 import "./main.css";
-import { useState } from "react";
-import { NavbarMain } from "./navbar";
-import { AddPost } from "./post";
+import { NavbarClient } from "./navbarClient";
+import { Home } from "./homePage";
+import { Routes, Route } from "react-router-dom";
+import { SingleBlog } from "./singleBlog";
+import { NotFound } from "../notFound";
 export function ClientApp() {
   return (
     <>
-      <NavbarMain />
-      <AddPost />
+      <NavbarClient />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<div>Blog List</div>} />
+        <Route path="/blog/:id" element={<SingleBlog />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </>
   );
 }
