@@ -8,7 +8,7 @@ export function Home() {
         >
           <div className="col-md-6 px-0">
             <h1 className="display-4 fst-italic">
-              Мэдээний гарчиг орж ирэх хэсэг
+              Мэдээний гарчиг
             </h1>
             <p className="lead my-3">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
