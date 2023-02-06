@@ -27,30 +27,34 @@ export function ArticlesNew() {
 
   return (
     <>
-      <div className="container" style={{ maxWidth: "580px" }}>
-        <CategoriesSelector
-          value={categoryId}
-          onChange={(val) => setCategoryId(val)}
-        />
-
+      <div
+        className="container"
+        style={{ maxWidth: "580px", marginTop: "5rem" }}
+      >
         <Form.Control
+          className="mb-4"
           value={title}
           placeholder="Мэдээний гарчиг"
           onChange={(e) => setTitle(e.target.value)}
         />
-
-        <CKEditor
-          editor={ClassicEditor}
-          data={text}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            setText(data);
-          }}
+        <CategoriesSelector
+          value={categoryId}
+          onChange={(val) => setCategoryId(val)}
         />
-        {/* <div dangerouslySetInnerHTML={{ __html: text }}></div> */}
-        <button className="btn btn-primary" onClick={submit}>
+        <div className="mt-4">
+          <CKEditor
+            editor={ClassicEditor}
+            data={text}
+            onChange={(event, editor) => {
+              const data = editor.getData();
+              setText(data);
+            }}
+          />
+        </div>
+        <button className="btn btn-primary mt-4" onClick={submit}>
           Хадгалах
         </button>
+        {/* <div dangerouslySetInnerHTML={{ __html: text }}></div> */}
       </div>
     </>
   );

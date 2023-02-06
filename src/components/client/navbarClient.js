@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 export function NavbarClient() {
   const [categories, setCategories] = useState([]);
   useEffect(() => {
@@ -20,9 +21,9 @@ export function NavbarClient() {
           <div className="row flex-nowrap justify-content-between align-items-center">
             <div className="col-4 pt-1"></div>
             <div className="col-4 text-center">
-              <a className="blog-header-logo text-dark " href="/home">
+              <Link className="blog-header-logo text-dark " to="/">
                 The News Room
-              </a>
+              </Link>
             </div>
             <div className="col-4 d-flex justify-content-end align-items-center">
               <a className="link-secondary" href="#" aria-label="Search">
@@ -32,10 +33,10 @@ export function NavbarClient() {
                   height="20"
                   fill="none"
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  class="mx-3"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="mx-3"
                   role="img"
                   viewBox="0 0 24 24"
                 >
@@ -54,7 +55,10 @@ export function NavbarClient() {
         <div className="nav-scroller py-1 mb-2">
           <nav className="nav d-flex justify-content-between">
             {categories.map((category) => (
-              <a class="p-2 link-secondary news-categories" key={category.id}>
+              <a
+                className="p-2 link-secondary news-categories"
+                key={category.id}
+              >
                 {category.name}
               </a>
             ))}

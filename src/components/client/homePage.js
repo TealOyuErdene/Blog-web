@@ -1,4 +1,25 @@
+import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 export function Home() {
+  const id = "bcfafb92-fa5d-47ca-96ae-c2f902178d46";
+  const [article, setArticle] = useState();
+  useEffect(() => {
+    axios.get(`http://localhost:8000/articles/${id}`).then((res) => {
+      const { data, status } = res;
+      if (status === 200) {
+        setArticle(data);
+      } else {
+        alert(`Error: ${status}`);
+      }
+    });
+  }, []);
+
+  if (!article) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="container">
@@ -7,9 +28,7 @@ export function Home() {
           style={{ backgroundColor: "#96C7C1" }}
         >
           <div className="col-md-6 px-0">
-            <h1 className="display-4 fst-italic">
-              Мэдээний гарчиг
-            </h1>
+            <h1 className="display-4 fst-italic">Мэдээний гарчиг</h1>
             <p className="lead my-3">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
               pulvinar nibh felis, a porta velit dapibus id. Donec volutpat enim
@@ -17,67 +36,35 @@ export function Home() {
               vestibulum.
             </p>
             <p className="lead mb-0">
-              <a href="#" class="text-white fw-bold">
+              <Link to="" className="text-white fw-bold">
                 Унших
-              </a>
+              </Link>
             </p>
           </div>
         </div>
 
-        <div class="row mb-2">
-          <div class="col-md-6">
-            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-primary">Спорт</strong>
-                <h3 class="mb-0"> Мэдээний Гарчиг</h3>
-                <div class="mb-1 text-muted">Nov 10</div>
-                <p class="card-text mb-auto">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar nibh felis, a porta velit dapibus id.
-                </p>
-                <a href="#" class="stretched-link">
-                  Унших
-                </a>
-              </div>
-              <div class="col-auto d-none d-lg-block">
-                <svg
-                  class="bd-placeholder-img"
-                  width="200"
-                  height="250"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: Thumbnail"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#89B5AF" />
-                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
-                    Зураг
-                  </text>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-              <div class="col p-4 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-success">
-                  Улс төр
+        <div className="row mb-2">
+          <div className="col-md-6">
+            <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+              <div className="col p-4 d-flex flex-column position-static">
+                <strong className="d-inline-block mb-2 text-primary">
+                  {article.category?.name}
                 </strong>
-                <h3 class="mb-0">Мэдээний гарчиг</h3>
-                <div class="mb-1 text-muted">Өчигдөр</div>
-                <p class="mb-auto">
+                <h3 className="mb-0"> Мэдээний Гарчиг</h3>
+                <div className="mb-1 text-muted">Nov 10</div>
+                <p className="card-text mb-auto">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar nibh felis, a porta velit dapibus id.
                 </p>
-                <a href="#" class="stretched-link">
+                <Link
+                  to="/blog/bcfafb92-fa5d-47ca-96ae-c2f902178d46"
+                  className="stretched-link"
+                >
                   Унших
-                </a>
+                </Link>
               </div>
-              <div class="col-auto d-none d-lg-block">
+              <div className="col-auto d-none d-lg-block">
                 <svg
-                  class="bd-placeholder-img"
+                  className="bd-placeholder-img"
                   width="200"
                   height="250"
                   xmlns="http://www.w3.org/2000/svg"
