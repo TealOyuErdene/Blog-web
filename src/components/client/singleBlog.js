@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import parse from "html-react-parser";
 import Badge from "react-bootstrap/Badge";
 
 export function SingleBlog() {
-  const { id } = useParams();
+  const id = "3fec3718-287a-4b1e-b008-47c50f1fee24";
   const [article, setArticle] = useState();
 
   useEffect(() => {
@@ -36,6 +35,7 @@ export function SingleBlog() {
         </Badge>
 
         <h1>{article.title}</h1>
+        <img style={{ width: "100%" }} src={article.image} />
         <div className="content mt-3">{parse(article.text)}</div>
       </div>
     </>

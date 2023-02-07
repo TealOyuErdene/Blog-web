@@ -9,6 +9,7 @@ export function ArticlesNew() {
   const [text, setText] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [title, setTitle] = useState("");
+  const [image, setImage] = useState();
 
   function submit() {
     axios
@@ -16,6 +17,7 @@ export function ArticlesNew() {
         title, //title: title,
         categoryId, //categoryId: categoryId,
         text, //text: text,
+        image, //image:image
       })
       .then((res) => {
         const { status } = res;
@@ -41,6 +43,15 @@ export function ArticlesNew() {
           value={categoryId}
           onChange={(val) => setCategoryId(val)}
         />
+
+        <Form.Control
+          type="url"
+          placeholder="Мэдээний зураг"
+          className="mt-4"
+          value={image}
+          onChange={(e) => setImage(e.target.value)}
+        />
+
         <div className="mt-4">
           <CKEditor
             editor={ClassicEditor}
