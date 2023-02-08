@@ -23,6 +23,10 @@ export function ArticlesNew() {
         const { status } = res;
         if (status === 201) {
           alert("success");
+          setTitle("");
+          setCategoryId("");
+          setImage("");
+          setText("");
         }
       });
   }

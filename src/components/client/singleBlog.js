@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import parse from "html-react-parser";
 import Badge from "react-bootstrap/Badge";
+import { useParams } from "react-router-dom";
 
 export function SingleBlog() {
-  const id = "3fec3718-287a-4b1e-b008-47c50f1fee24";
+  const { id } = useParams();
   const [article, setArticle] = useState();
 
   useEffect(() => {
