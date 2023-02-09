@@ -55,12 +55,13 @@ export function NavbarClient() {
         <div className="nav-scroller py-1 mb-2">
           <nav className="nav d-flex justify-content-between">
             {categories.map((category) => (
-              <a
+              <Link
                 className="p-2 link-secondary news-categories"
                 key={category.id}
+                to={`/category/${category.id}`}
               >
                 {category.name}
-              </a>
+              </Link>
             ))}
           </nav>
         </div>
