@@ -4,6 +4,7 @@ import { Home } from "./homePage";
 import { Routes, Route } from "react-router-dom";
 import { SingleBlog } from "./singleBlog";
 import { NotFound } from "../notFound";
+import { FilteredCategory } from "./filteredCategory";
 export function ClientApp() {
   return (
     <>
@@ -13,6 +14,7 @@ export function ClientApp() {
         <Route path="/blog" element={<div>Blog List</div>} />
         <Route path="/blog/:id" element={<SingleBlog />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/articles/:categoryId" element={<FilteredCategory />} />
       </Routes>
     </>
   );

@@ -3,19 +3,20 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export function Home() {
-  const [article, setArticle] = useState();
+  const [articles, setArticles] = useState();
+
   useEffect(() => {
     axios.get(`http://localhost:8000/articles`).then((res) => {
       const { data, status } = res;
       if (status === 200) {
-        setArticle(data);
+        setArticles(data);
       } else {
         alert(`Error: ${status}`);
       }
     });
   }, []);
 
-  if (!article) {
+  if (!articles) {
     return <div>Loading...</div>;
   }
 
@@ -24,11 +25,11 @@ export function Home() {
       <div className="album py-5">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            {article.map((articles) => {
+            {articles.map((article) => {
               return (
-                <div className="col" key={articles.id}>
+                <div className="col" key={article.id}>
                   <img
-                    src={articles.image}
+                    src={article.image}
                     style={{
                       width: "100%",
                       height: "auto",
@@ -38,22 +39,15 @@ export function Home() {
                   />
                   <div className="card shadow-sm" style={{ border: "none" }}>
                     <div className="card-body">
-                      <p className="card-text">{articles.title}</p>
+                      <p className="card-text">{article.title}</p>
                       <div className="d-flex justify-content-between align-items-center">
                         <Link
-                          to={`/blog/${articles.id}`}
+                          to={`/blog/${article.id}`}
                           type="button"
                           className="btn btn-sm btn-outline-secondary"
                         >
                           Унших
                         </Link>
-
-                        {/* <small
-                          className="text-muted"
-                          style={{ fontSize: "12px" }}
-                        >
-                          Өчигдөр
-                        </small> */}
                       </div>
                     </div>
                   </div>

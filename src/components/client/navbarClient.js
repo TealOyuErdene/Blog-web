@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 export function NavbarClient() {
   const [categories, setCategories] = useState([]);
+
   useEffect(() => {
     axios.get(`http://localhost:8000/categories`).then((res) => {
       const { data, status } = res;
@@ -12,7 +13,7 @@ export function NavbarClient() {
         alert(`Error: ${status}`);
       }
     });
-  });
+  }, []);
 
   return (
     <>
@@ -58,7 +59,7 @@ export function NavbarClient() {
               <Link
                 className="p-2 link-secondary news-categories"
                 key={category.id}
-                to={`/category/${category.id}`}
+                to={`/articles/${category.id}`}
               >
                 {category.name}
               </Link>
