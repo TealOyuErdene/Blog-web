@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Pagination } from "./pagination";
+
 
 export function Home() {
   const [articles, setArticles] = useState();
@@ -57,6 +59,8 @@ export function Home() {
           </div>
         </div>
       </div>
+
+      <Pagination/>
     </>
   );
 }
