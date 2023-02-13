@@ -1,22 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Pagination } from "./pagination";
-
 
 export function Home() {
-  const [articles, setArticles] = useState();
+  const [articles, setArticles] = useState([]);
+  const [searchParams] = useSearchParams();
+  const [pages, setPages] = useState();
+  const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
+
+  function loadArticles(page, query = "") {
+    axios
+      .get(`http://localhost:8000/articles?q=${query}&page=${page}`)
+      .then((res) => {
+        const { data, status } = res;
+        if (status === 200) {
+          const { list, count } = data;
+          setArticles(list);
+          setPages(Math.ceil(count / 10));
+        } else {
+          alert(`Error: ${status}`);
+        }
+      });
+  }
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/articles`).then((res) => {
-      const { data, status } = res;
-      if (status === 200) {
-        setArticles(data);
-      } else {
-        alert(`Error: ${status}`);
-      }
-    });
-  }, []);
+    loadArticles(page, "");
+  }, [page]);
 
   if (!articles) {
     return <div>Loading...</div>;
@@ -60,7 +69,40 @@ export function Home() {
         </div>
       </div>
 
-      <Pagination/>
+      <nav aria-label="Page navigation example">
+        <ul className="pagination" style={{ flexWrap: "wrap" }}>
+          {page !== 1 && (
+            <li className="page-item">
+              <Link to={`?page=${page - 1}`} className="page-link">
+                Өмнөх
+              </Link>
+            </li>
+          )}
+
+          {[...Array(pages)].map((_, index) => (
+            <li
+              key={index}
+              className={`page item ${page == index + 1 ? "active" : ""}`}
+            >
+              <Link
+                to={`?page=${index + 1}`}
+                className="page-link"
+                aria-current="page"
+              >
+                {index + 1}
+              </Link>
+            </li>
+          ))}
+
+          {page !== pages && (
+            <li className="page-item">
+              <Link to={`?page=${page + 1}`} className="page-link" href="#">
+                Дараах
+              </Link>
+            </li>
+          )}
+        </ul>
+      </nav>
     </>
   );
 }

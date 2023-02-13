@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 export function FilteredCategory() {
   const [singleCategory, setSingleCategory] = useState();
   const { categoryId } = useParams();
-  //   const [article, setArticle] = useState();
 
   useEffect(() => {
     axios
@@ -20,28 +19,12 @@ export function FilteredCategory() {
       });
   }, [categoryId]);
 
-  //   useEffect(() => {
-  //     axios.get(`http://localhost:8000/categories`).then((res) => {
-  //       const { data, status } = res;
-  //       if (status === 200) {
-  //         setArticle(data);
-  //       } else {
-  //         alert(`Error: ${status}`);
-  //       }
-  //     });
-  //   }, []);
-
   if (!singleCategory) {
     return <div>Loading...</div>;
   }
 
-  //   if (!article) {
-  //     return <div>Loading...</div>;
-  //   }
-
   return (
     <>
-      {/* <div>{article.category?.name}</div> */}
       <div className="album py-5">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">

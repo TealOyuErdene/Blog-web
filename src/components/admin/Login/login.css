@@ -4,27 +4,21 @@
     box-sizing: border-box;
 }
 
-body {
-    background: #f6f5f7;
+.body {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     font-family: 'Montserrat', sans-serif;
     height: 100vh;
-    margin: -20px 0 50px;
 }
 
-h1 {
+.h1 {
     font-weight: bold;
     margin: 0;
 }
 
-h2 {
-    text-align: center;
-}
-
-p {
+.p {
     font-size: 14px;
     font-weight: 100;
     line-height: 20px;
@@ -32,18 +26,18 @@ p {
     margin: 20px 0 30px;
 }
 
-span {
+.span {
     font-size: 12px;
 }
 
-a {
+.a {
     color: #333;
     font-size: 14px;
     text-decoration: none;
     margin: 15px 0;
 }
 
-button {
+.btn-login {
     border-radius: 20px;
     border: 1px solid rgb(12, 85, 141);
     background-color: rgb(12, 85, 141);
@@ -56,15 +50,16 @@ button {
     transition: transform 80ms ease-in;
 }
 
-button:active {
+
+.btn-login:active {
     transform: scale(0.95);
 }
 
-button:focus {
+.btn-login:focus {
     outline: none;
 }
 
-button.ghost {
+.btn-login.ghost {
     background-color: transparent;
     border-color: #FFFFFF;
 }
@@ -210,6 +205,13 @@ input {
 
 .container.right-panel-active .overlay-right {
     transform: translateX(20%);
+}
+
+.social{
+    color: #333;
+        font-size: 14px;
+        text-decoration: none;
+        margin: 15px 0;
 }
 
 .social-container {

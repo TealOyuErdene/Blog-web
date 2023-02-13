@@ -4,7 +4,7 @@ import MainTodo from "./todoMain";
 
 import { ArticlesNew } from "./articlesNew";
 import { Articles } from "./articles";
-import { Login } from "./Login";
+// import { Login } from "./Login";
 
 export function AdminApp() {
   return (
@@ -15,10 +15,7 @@ export function AdminApp() {
           <Route path="/categories" element={<MainTodo />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/new" element={<ArticlesNew />} />
-        </Routes>
-
-        <Routes>
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} /> */}
         </Routes>
       </div>
     </>
