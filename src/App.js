@@ -4,7 +4,7 @@ import { ClientApp } from "./components/client/ClientApp";
 import { AdminApp } from "./components/admin/AdminApp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Login } from "./components/admin/Login/main";
+// import { Login } from "./components/admin/Login/main";
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
         <Routes>
           <Route path="*" element={<ClientApp />}></Route>
           <Route path="/admin/*" element={<AdminApp />}></Route>
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} /> */}
         </Routes>
         <ToastContainer
           position="bottom-right"

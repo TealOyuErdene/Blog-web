@@ -11,9 +11,9 @@ export function Login() {
   return (
     <>
       <div className="body">
-        <div ref={divEl} className="container-login" id="container">
+        <div ref={divEl} className="container_login" id="container">
           <div className="form-container sign-up-container">
-            <form action="#">
+            <form action="#" className="form">
               <h1 className="h1">Create Account</h1>
               <div className="social-container">
                 <a href="#" className="social ">
@@ -27,14 +27,14 @@ export function Login() {
                 </a>
               </div>
               <span className="span">or use your email for registration</span>
-              <input type="text" placeholder="Name" />
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
-              <button className="btn-login">Sign Up</button>
+              <input className="input" type="text" placeholder="Name" />
+              <input className="input" type="email" placeholder="Email" />
+              <input className="input" type="password" placeholder="Password" />
+              <button className="btn_login">Sign Up</button>
             </form>
           </div>
           <div className="form-container sign-in-container">
-            <form action="#">
+            <form action="#" className="form">
               <h1 className="h1">Sign in</h1>
               <div className="social-container">
                 <a href="#" className="social">
@@ -48,12 +48,12 @@ export function Login() {
                 </a>
               </div>
               <span className="span">or use your account</span>
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
+              <input className="input" type="email" placeholder="Email" />
+              <input className="input" type="password" placeholder="Password" />
               <a href="#" className="a">
                 Forgot your password?
               </a>
-              <button className="btn-login">Sign In</button>
+              <button className="btn_login">Sign In</button>
             </form>
           </div>
           <div className="overlay-container">
@@ -64,7 +64,7 @@ export function Login() {
                   To keep connected with us please login with your personal info
                 </p>
                 <button
-                  className="ghost btn-login"
+                  className="ghost btn_login"
                   id="signIn"
                   onClick={signIn}
                 >
@@ -77,7 +77,7 @@ export function Login() {
                   Enter your personal details and start journey with us
                 </p>
                 <button
-                  className="ghost btn-login"
+                  className="ghost btn_login"
                   id="signUp"
                   onClick={signUp}
                 >

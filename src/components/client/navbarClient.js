@@ -46,9 +46,13 @@ export function NavbarClient() {
                   <path d="M21 21l-5.2-5.2" />
                 </svg>
               </a>
-              <a className="btn btn-sm btn-outline-secondary" href="#">
+              <Link
+                to={"/login"}
+                className="btn btn-sm btn-outline-secondary"
+                href="#"
+              >
                 Нэвтрэх
-              </a>
+              </Link>
             </div>
           </div>
         </header>
