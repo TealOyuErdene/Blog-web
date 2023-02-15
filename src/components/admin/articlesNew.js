@@ -69,7 +69,6 @@ export function ArticlesNew() {
         <button className="btn btn-primary mt-4" onClick={submit}>
           Хадгалах
         </button>
-        {/* <div dangerouslySetInnerHTML={{ __html: text }}></div> */}
       </div>
     </>
   );

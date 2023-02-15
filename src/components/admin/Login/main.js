@@ -1,12 +1,28 @@
 import "./login.css";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import axios from "axios";
 export function Login() {
   const divEl = useRef();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   function signUp() {
     divEl.current.classList.add("right-panel-active");
   }
   function signIn() {
     divEl.current.classList.remove("right-panel-active");
+  }
+
+  function handleLogin() {
+    axios
+      .get(
+        `http://localhost:8000/login?username=${username}& password=${password}`
+      )
+      .then((res) => {
+        const { data, status } = res;
+        if (status === 200) {
+          const { token } = data;
+        }
+      });
   }
   return (
     <>
@@ -26,7 +42,6 @@ export function Login() {
                   <i className="fab fa-linkedin-in"></i>
                 </a>
               </div>
-              <span className="span">or use your email for registration</span>
               <input className="input" type="text" placeholder="Name" />
               <input className="input" type="email" placeholder="Email" />
               <input className="input" type="password" placeholder="Password" />
@@ -35,7 +50,7 @@ export function Login() {
           </div>
           <div className="form-container sign-in-container">
             <form action="#" className="form">
-              <h1 className="h1">Sign in</h1>
+              <h1 className="h1">Log in</h1>
               <div className="social-container">
                 <a href="#" className="social">
                   <i className="fab fa-facebook-f"></i>
@@ -47,13 +62,27 @@ export function Login() {
                   <i className="fab fa-linkedin-in"></i>
                 </a>
               </div>
-              <span className="span">or use your account</span>
-              <input className="input" type="email" placeholder="Email" />
-              <input className="input" type="password" placeholder="Password" />
+
+              <input
+                className="input"
+                type="email"
+                placeholder="Email"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <input
+                className="input"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
               <a href="#" className="a">
                 Forgot your password?
               </a>
-              <button className="btn_login">Sign In</button>
+              <button className="btn_login" onClick={handleLogin}>
+                Log In
+              </button>
             </form>
           </div>
           <div className="overlay-container">
@@ -68,7 +97,7 @@ export function Login() {
                   id="signIn"
                   onClick={signIn}
                 >
-                  Sign In
+                  Log In
                 </button>
               </div>
               <div className="overlay-panel overlay-right">
