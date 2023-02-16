@@ -39,7 +39,10 @@ export function Articles() {
   }
 
   function searchedArticles(e) {
-    setQuery(e.target.value);
+   const utga = setQuery(e.target.value);
+    if(!utga){
+      console.log("Hooson")
+    }
   }
 
   useEffect(() => {
@@ -58,7 +61,6 @@ export function Articles() {
     return <div>Loading...</div>;
   }
 
-  console.log(articles);
   if (articles.length === 0) {
     return (
       <>

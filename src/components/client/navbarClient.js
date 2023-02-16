@@ -9,6 +9,7 @@ export function NavbarClient() {
       const { data, status } = res;
       if (status === 200) {
         setCategories(data);
+        console.log(setCategories)
       } else {
         alert(`Error: ${status}`);
       }
