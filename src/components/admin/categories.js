@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { TodoNew } from "./todoNew";
-import { TodoList } from "./todoList";
+import { CategoriesNew } from "./categoriesNew";
+import { CategoriesList } from "./categoriesList";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "use-debounce";
 
-function MainTodo() {
+export function Categories() {
   const [list, setList] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams({});
   const editing = searchParams.get("editing");
@@ -32,14 +32,17 @@ function MainTodo() {
   }
 
   function loadCategory(query = "") {
-    axios.get(`http://localhost:8000/categories?q=${query}`).then((res) => {
-      const { data, status } = res;
-      if (status === 200) {
-        setList(data);
-      } else {
-        alert(`Error: ${status}`);
-      }
-    });
+    const token = localStorage.getItem("loginToken");
+    axios
+      .get(`http://localhost:8000/categories?q=${query}&token=${token}`)
+      .then((res) => {
+        const { data, status } = res;
+        if (status === 200) {
+          setList(data);
+        } else {
+          alert(`Error: ${status}`);
+        }
+      });
   }
 
   useEffect(() => {
@@ -53,7 +56,7 @@ function MainTodo() {
   return (
     <>
       <div className="container" style={{ maxWidth: "580px" }}>
-        <TodoNew
+        <CategoriesNew
           loadCategory={loadCategory}
           editingId={editing}
           onClose={onClose}
@@ -64,7 +67,7 @@ function MainTodo() {
           list={list}
         />
 
-        <TodoList
+        <CategoriesList
           loadCategory={loadCategory}
           list={list}
           editingId={editing}
@@ -74,5 +77,3 @@ function MainTodo() {
     </>
   );
 }
-
-export default MainTodo;

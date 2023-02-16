@@ -1,22 +1,23 @@
 import NavbarAdmin from "./navbarAdmin";
 import { Route, Routes } from "react-router-dom";
-import MainTodo from "./todoMain";
 import { ArticlesNew } from "./articlesNew";
 import { Articles } from "./articles";
 import { Login } from "./Login/main";
+import { Categories } from "./categories";
 // import { Sidebar } from "./Sidebar/sidebar";
 
 export function AdminApp() {
+  if (!localStorage.getItem("loginToken")) {
+    return <Login />;
+  }
+
   return (
     <>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-      </Routes>
       <NavbarAdmin />
       {/* <Sidebar /> */}
       <div style={{ maxWidth: 1000, margin: "2rem auto" }}>
         <Routes>
-          <Route path="/categories" element={<MainTodo />} />
+          <Route path="/categories" element={<Categories />} />
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/new" element={<ArticlesNew />} />
           <Route path="/articles/change" element={<ArticlesNew />} />

@@ -7,6 +7,10 @@ import { Link, NavLink } from "react-router-dom";
 import "react-awesome-button/dist/styles.css";
 
 function NavbarAdmin() {
+  function logout() {
+    localStorage.removeItem("loginToken");
+    window.location.reload();
+  }
   return (
     <>
       <Navbar expand="lg" bg="dark" variant="dark">
@@ -35,7 +39,9 @@ function NavbarAdmin() {
               </Nav.Link>
             </Nav>
             <Form className="d-flex">
-              <AwesomeButton type="danger">Гарах</AwesomeButton>
+              <AwesomeButton type="danger" onPress={logout}>
+                Гарах
+              </AwesomeButton>
             </Form>
           </Navbar.Collapse>
         </Container>

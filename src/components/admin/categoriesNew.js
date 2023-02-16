@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import img1 from "../../Images/404-not-found.gif";
-export function TodoNew({
+export function CategoriesNew({
   loadCategory,
   editingId,
   onClose,
@@ -113,7 +113,7 @@ export function TodoNew({
         <div className="d-flex flex-column align-items-center">
           <img style={{ width: "50%" }} src={img1} />
           <h6 className="mt-5 ">
-            "<b>{query}</b>"" түлхүүрт илэрц олдсонгүй...
+            "<b>{query}</b>" түлхүүрт илэрц олдсонгүй...
           </h6>
         </div>
       </>

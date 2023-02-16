@@ -2,7 +2,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import axios from "axios";
 
-export function TodoList({ list, loadCategory, onEdit }) {
+export function CategoriesList({ list, loadCategory, onEdit }) {
   function handleDelete(id) {
     if (window.confirm("Устгах уу")) {
       axios.delete(`http://localhost:8000/categories/${id}`).then((res) => {
