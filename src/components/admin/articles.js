@@ -39,9 +39,10 @@ export function Articles() {
   }
 
   function searchedArticles(e) {
-   const utga = setQuery(e.target.value);
-    if(!utga){
-      console.log("Hooson")
+    setQuery(e.target.value);
+
+    if (!searchedQuery) {
+      console.log("hooson");
     }
   }
 
@@ -79,6 +80,7 @@ export function Articles() {
       </>
     );
   }
+
   return (
     <>
       <div className="container" style={{ maxWidth: "580px" }}>
@@ -98,7 +100,7 @@ export function Articles() {
       <div className="album">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            {articles?.map((article) => {
+            {articles.map((article) => {
               return (
                 <div key={article.id}>
                   <ArticlesList article={article} loadArticles={loadArticles} />
