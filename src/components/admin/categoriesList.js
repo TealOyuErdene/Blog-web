@@ -17,12 +17,12 @@ export function CategoriesList({ list, loadCategory, onEdit }) {
   return (
     <>
       <ul style={{ paddingLeft: "0px" }}>
-        {list.map((todo) => {
+        {list.map((item) => {
           return (
-            <div className="d-flex" key={todo.id}>
+            <div className="d-flex" key={item.id}>
               <NormalItem
                 handleDelete={handleDelete}
-                todo={todo}
+                item={item}
                 onEdit={onEdit}
               />
             </div>
@@ -33,26 +33,26 @@ export function CategoriesList({ list, loadCategory, onEdit }) {
   );
 }
 
-function NormalItem({ handleDelete, todo, onEdit }) {
+function NormalItem({ handleDelete, item, onEdit }) {
   return (
     <>
       <Card
         className="mb-4 d-flex flex-row col-lg-6 "
         style={{ width: "400px" }}
       >
-        <Card.Body>{todo.name}</Card.Body>
+        <Card.Body>{item.name}</Card.Body>
       </Card>
       <Button
         variant="outline-secondary mt-2 mx-3 border-0"
         style={{ height: "35px" }}
-        onClick={() => onEdit(todo.id)}
+        onClick={() => onEdit(item.id)}
       >
         Засах
       </Button>
       <Button
         variant="outline-secondary mt-2 me-2 border-0"
         style={{ height: "35px" }}
-        onClick={() => handleDelete(todo.id)}
+        onClick={() => handleDelete(item.id)}
       >
         Устгах
       </Button>

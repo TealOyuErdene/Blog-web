@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ArticlesList } from "./articlesList";
 import { useDebounce } from "use-debounce";
+import { Search } from "react-bootstrap-icons";
 export function Articles() {
   const [articles, setArticles] = useState([]);
   const [searchParams] = useSearchParams();
@@ -65,12 +66,30 @@ export function Articles() {
   if (articles.length === 0) {
     return (
       <>
-        <Form.Control
+        {/* <Form.Control
           value={query}
           style={{ width: "12rem" }}
           placeholder="Мэдээ хайх"
           onChange={searchedArticles}
-        />
+        /> */}
+
+        <div className="wrap">
+          <div className="search">
+            <input
+              type="text"
+              className="searchTerm"
+              placeholder="Мэдээ хайх"
+              value={query}
+              onChange={searchedArticles}
+            />
+            <button type="submit" className="searchButton">
+              <svg className="mt-2">
+                <Search />
+              </svg>
+            </button>
+          </div>
+        </div>
+
         <div className="d-flex flex-column align-items-center">
           <img style={{ width: "50%" }} src={img1} />
           <h6 className="mt-5 ">
@@ -85,12 +104,30 @@ export function Articles() {
     <>
       <div className="container" style={{ maxWidth: "580px" }}>
         <div className="d-flex justify-content-between mb-5">
-          <Form.Control
+          {/* <Form.Control
             value={query}
             style={{ width: "12rem" }}
             placeholder="Мэдээ хайх"
             onChange={searchedArticles}
-          />
+          /> */}
+
+          <div className="wrap">
+            <div className="search">
+              <input
+                value={query}
+                placeholder="Мэдээ хайх"
+                onChange={searchedArticles}
+                type="text"
+                className="searchTerm"
+              />
+              <button type="submit" className="searchButton">
+                <svg className="mt-2">
+                  <Search />
+                </svg>
+              </button>
+            </div>
+          </div>
+
           <Link to="/admin/articles/new">
             <AwesomeButton type="primary">Мэдээ нэмэх</AwesomeButton>
           </Link>
