@@ -1,19 +1,14 @@
-import Form from "react-bootstrap/Form";
-import { AwesomeButton } from "react-awesome-button";
-import "react-awesome-button/dist/styles.css";
 import { Link, useSearchParams } from "react-router-dom";
 import img1 from "../../Images/404-not-found.gif";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ArticlesList } from "./articlesList";
-import { useDebounce } from "use-debounce";
 import { Search } from "react-bootstrap-icons";
 export function Articles() {
   const [articles, setArticles] = useState([]);
   const [searchParams] = useSearchParams();
   const [pages, setPages] = useState();
   const [query, setQuery] = useState("");
-  const [searchedQuery] = useDebounce(query, 1000);
 
   const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
 
@@ -21,7 +16,7 @@ export function Articles() {
     const token = localStorage.getItem("loginToken");
     axios
       .get(
-        `http://localhost:8000/articles?q=${searchedQuery}&page=${page}&token=${token}`
+        `http://localhost:8000/articles?q=${query}&page=${page}&token=${token}`
       )
       .then((res) => {
         const { data, status } = res;
@@ -39,18 +34,6 @@ export function Articles() {
       });
   }
 
-  function searchedArticles(e) {
-    setQuery(e.target.value);
-
-    if (!searchedQuery) {
-      console.log("hooson");
-    }
-  }
-
-  useEffect(() => {
-    loadArticles(searchedQuery);
-  }, [!searchedQuery]);
-
   useEffect(() => {
     loadArticles();
   }, []);
@@ -66,13 +49,6 @@ export function Articles() {
   if (articles.length === 0) {
     return (
       <>
-        {/* <Form.Control
-          value={query}
-          style={{ width: "12rem" }}
-          placeholder="Мэдээ хайх"
-          onChange={searchedArticles}
-        /> */}
-
         <div className="wrap">
           <div className="search">
             <input
@@ -80,9 +56,13 @@ export function Articles() {
               className="searchTerm"
               placeholder="Мэдээ хайх"
               value={query}
-              onChange={searchedArticles}
+              onChange={(e) => setQuery(e.target.value)}
             />
-            <button type="submit" className="searchButton">
+            <button
+              type="submit"
+              className="searchButton"
+              onClick={() => loadArticles(query)}
+            >
               <svg className="mt-2">
                 <Search />
               </svg>
@@ -104,23 +84,21 @@ export function Articles() {
     <>
       <div className="container" style={{ maxWidth: "580px" }}>
         <div className="d-flex justify-content-between mb-5">
-          {/* <Form.Control
-            value={query}
-            style={{ width: "12rem" }}
-            placeholder="Мэдээ хайх"
-            onChange={searchedArticles}
-          /> */}
-
           <div className="wrap">
             <div className="search">
               <input
                 value={query}
-                placeholder="Мэдээ хайх"
-                onChange={searchedArticles}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Xайх"
                 type="text"
                 className="searchTerm"
               />
-              <button type="submit" className="searchButton">
+
+              <button
+                type="submit"
+                className="searchButton"
+                onClick={() => loadArticles(query)}
+              >
                 <svg className="mt-2">
                   <Search />
                 </svg>
@@ -129,7 +107,16 @@ export function Articles() {
           </div>
 
           <Link to="/admin/articles/new">
-            <AwesomeButton type="primary">Мэдээ нэмэх</AwesomeButton>
+            <button
+              className="btn"
+              style={{
+                backgroundColor: "#C0C0C0",
+                color: "white",
+                height: "40px",
+              }}
+            >
+              Мэдээ нэмэх
+            </button>
           </Link>
         </div>
       </div>
