@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { ArticlesList } from "./articlesList";
 import { Search } from "react-bootstrap-icons";
+import { Button } from "react-bootstrap";
 export function Articles() {
   const [articles, setArticles] = useState([]);
   const [searchParams] = useSearchParams();
@@ -46,77 +47,12 @@ export function Articles() {
     return <div>Loading...</div>;
   }
 
-  if (articles.length === 0) {
-    return (
-      <>
-        <div className="wrap">
-          <div className="search">
-            <input
-              type="text"
-              className="searchTerm"
-              placeholder="Мэдээ хайх"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <button
-              type="submit"
-              className="searchButton"
-              onClick={() => loadArticles(query)}
-            >
-              <svg className="mt-2">
-                <Search />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <div className="d-flex flex-column align-items-center">
-          <img style={{ width: "50%" }} src={img1} />
-          <h6 className="mt-5 ">
-            "<b>{query}</b>" түлхүүрт илэрц олдсонгүй...
-          </h6>
-        </div>
-      </>
-    );
-  }
-
   return (
     <>
       <div className="container" style={{ maxWidth: "580px" }}>
         <div className="d-flex justify-content-between mb-5">
-          <div className="wrap">
-            <div className="search">
-              <input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Xайх"
-                type="text"
-                className="searchTerm"
-              />
-
-              <button
-                type="submit"
-                className="searchButton"
-                onClick={() => loadArticles(query)}
-              >
-                <svg className="mt-2">
-                  <Search />
-                </svg>
-              </button>
-            </div>
-          </div>
-
           <Link to="/admin/articles/new">
-            <button
-              className="btn"
-              style={{
-                backgroundColor: "#C0C0C0",
-                color: "white",
-                height: "40px",
-              }}
-            >
-              Мэдээ нэмэх
-            </button>
+            <Button className="btn">Мэдээ нэмэх</Button>
           </Link>
         </div>
       </div>
