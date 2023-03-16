@@ -1,9 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
-import img1 from "../../Images/404-not-found.gif";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ArticlesList } from "./articlesList";
-import { Search } from "react-bootstrap-icons";
 import { Button } from "react-bootstrap";
 export function Articles() {
   const [articles, setArticles] = useState([]);
@@ -16,13 +14,12 @@ export function Articles() {
   function loadArticles(page) {
     const token = localStorage.getItem("loginToken");
     axios
-      .get(
-        `http://localhost:8000/articles?q=${query}&page=${page}&token=${token}`
-      )
+      .get(`http://localhost:8000/articles?q=${query}&page=${page}`)
       .then((res) => {
         const { data, status } = res;
         if (status === 200) {
           const { list, count } = data;
+          console.log(list);
           if (!list) {
             setArticles(data);
           } else {

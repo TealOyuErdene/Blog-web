@@ -14,10 +14,10 @@ export function ArticlesNew() {
   function submit() {
     axios
       .post("http://localhost:8000/articles", {
-        title, //title: title,
-        categoryId, //categoryId: categoryId,
-        text, //text: text,
-        image, //image:image
+        title,
+        categoryId,
+        text,
+        image,
       })
       .then((res) => {
         const { status } = res;

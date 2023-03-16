@@ -21,8 +21,8 @@ export function Categories() {
     handleShow();
   }
 
-  function onEdit(id) {
-    setSearchParams({ editing: id });
+  function onEdit(_id) {
+    setSearchParams({ editing: _id });
     handleShow();
   }
 

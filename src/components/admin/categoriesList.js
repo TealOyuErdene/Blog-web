@@ -3,9 +3,9 @@ import Card from "react-bootstrap/Card";
 import axios from "axios";
 
 export function CategoriesList({ list, loadCategory, onEdit }) {
-  function handleDelete(id) {
+  function handleDelete(_id) {
     if (window.confirm("Устгах уу")) {
-      axios.delete(`http://localhost:8000/categories/${id}`).then((res) => {
+      axios.delete(`http://localhost:8000/categories/${_id}`).then((res) => {
         const { status } = res;
         if (status === 200) {
           loadCategory();
@@ -19,7 +19,7 @@ export function CategoriesList({ list, loadCategory, onEdit }) {
       <ul style={{ paddingLeft: "0px" }}>
         {list.map((item) => {
           return (
-            <div className="d-flex" key={item.id}>
+            <div className="d-flex" key={item._id}>
               <NormalItem
                 handleDelete={handleDelete}
                 item={item}
@@ -45,14 +45,14 @@ function NormalItem({ handleDelete, item, onEdit }) {
       <Button
         variant="outline-secondary mt-2 mx-3 border-0"
         style={{ height: "35px" }}
-        onClick={() => onEdit(item.id)}
+        onClick={() => onEdit(item._id)}
       >
         Засах
       </Button>
       <Button
         variant="outline-secondary mt-2 me-2 border-0"
         style={{ height: "35px" }}
-        onClick={() => handleDelete(item.id)}
+        onClick={() => handleDelete(item._id)}
       >
         Устгах
       </Button>
