@@ -8,7 +8,6 @@ export function Articles() {
   const [searchParams] = useSearchParams();
   const [pages, setPages] = useState();
   const [query, setQuery] = useState("");
-
   const page = searchParams.get("page") ? Number(searchParams.get("page")) : 1;
 
   function loadArticles(page) {
@@ -19,7 +18,6 @@ export function Articles() {
         const { data, status } = res;
         if (status === 200) {
           const { list, count } = data;
-          console.log(list);
           if (!list) {
             setArticles(data);
           } else {
@@ -57,7 +55,7 @@ export function Articles() {
       <div className="album">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            {articles.map((article) => {
+            {articles?.map((article) => {
               return (
                 <div key={article.id}>
                   <ArticlesList article={article} loadArticles={loadArticles} />

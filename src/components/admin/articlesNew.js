@@ -15,8 +15,8 @@ export function ArticlesNew() {
     axios
       .post("http://localhost:8000/articles", {
         title,
-        categoryId,
         text,
+        categoryId,
         image,
       })
       .then((res) => {
