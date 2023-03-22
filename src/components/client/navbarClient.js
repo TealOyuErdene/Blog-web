@@ -62,8 +62,8 @@ export function NavbarClient() {
             {categories.map((category) => (
               <Link
                 className="p-2 link-secondary news-categories"
-                key={category.id}
-                to={`/articles/${category.id}`}
+                key={category._id}
+                to={`/articles/${category._id}`}
               >
                 {category.name}
               </Link>

@@ -57,7 +57,7 @@ export function Articles() {
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             {articles?.map((article) => {
               return (
-                <div key={article.id}>
+                <div key={article._id}>
                   <ArticlesList article={article} loadArticles={loadArticles} />
                 </div>
               );

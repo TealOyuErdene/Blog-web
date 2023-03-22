@@ -9,7 +9,8 @@ export function ArticlesNew() {
   const [text, setText] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [title, setTitle] = useState("");
-  const [image, setImage] = useState();
+  const [image, setImage] = useState(null);
+  const [uploading, setUploading] = useState(false);
 
   function submit() {
     axios
@@ -25,9 +26,27 @@ export function ArticlesNew() {
           alert("success");
           setTitle("");
           setCategoryId("");
-          setImage("");
           setText("");
+          setImage(null);
         }
+      });
+  }
+
+  async function handleFileUpload(event) {
+    setUploading(true);
+    const imageFile = event.target.files[0];
+
+    const formData = new FormData();
+    formData.append("image", imageFile);
+
+    await fetch("http://localhost:8000/upload-image", {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setImage(data);
+        setUploading(false);
       });
   }
 
@@ -48,14 +67,6 @@ export function ArticlesNew() {
           onChange={(val) => setCategoryId(val)}
         />
 
-        <Form.Control
-          type="url"
-          placeholder="Мэдээний зураг"
-          className="mt-4"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
-
         <div className="mt-4">
           <CKEditor
             editor={ClassicEditor}
@@ -66,6 +77,19 @@ export function ArticlesNew() {
             }}
           />
         </div>
+
+        <div className="mt-4">
+          <input
+            type="file"
+            className="form-control me-2"
+            name="image"
+            onChange={handleFileUpload}
+          />
+
+          {uploading && <div className="spinner-border" role="status"></div>}
+          {image && <img src={image.path} width="100" alt="" />}
+        </div>
+
         <button className="btn btn-primary mt-4" onClick={submit}>
           Хадгалах
         </button>

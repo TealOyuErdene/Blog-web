@@ -38,12 +38,12 @@ export function Home() {
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
             {articles.map((article) => {
               return (
-                <div key={article.id}>
+                <div key={article._id}>
                   <Link
-                    to={`/blog/${article.id}`}
+                    to={`/blog/${article._id}`}
                     style={{ textDecoration: "none", color: "black" }}
                   >
-                    <div className="wrapper" key={article.id}>
+                    <div className="wrapper" key={article._id}>
                       <div className="blog">
                         <div className="card-banner">
                           <img
