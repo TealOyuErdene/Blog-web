@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 export function FilteredCategory() {
-  const [singleCategory, setSingleCategory] = useState();
+  const [filteredArticle, setFilteredArticle] = useState();
   const { categoryId } = useParams();
 
   useEffect(() => {
@@ -11,15 +11,16 @@ export function FilteredCategory() {
       .get(`http://localhost:8000/articles/category/${categoryId}`)
       .then((res) => {
         const { data, status } = res;
+        console.log(data);
         if (status === 200) {
-          setSingleCategory(data);
+          setFilteredArticle(data);
         } else {
           alert(`Error: ${status}`);
         }
       });
   }, [categoryId]);
 
-  if (!singleCategory) {
+  if (!filteredArticle) {
     return <div>Loading...</div>;
   }
 
@@ -28,11 +29,11 @@ export function FilteredCategory() {
       <div className="album py-5">
         <div className="container">
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-            {singleCategory.map((category) => {
+            {filteredArticle.map((article) => {
               return (
-                <div className="col" key={category.id}>
+                <div className="col" key={article._id}>
                   <img
-                    src={category.image}
+                    src={article.image.path}
                     style={{
                       width: "100%",
                       height: "auto",
@@ -42,10 +43,10 @@ export function FilteredCategory() {
                   />
                   <div className="card shadow-sm" style={{ border: "none" }}>
                     <div className="card-body">
-                      <p className="card-text">{category.title}</p>
+                      <p className="card-text">{article.title}</p>
                       <div className="d-flex justify-content-between align-items-center">
                         <Link
-                          to={`/blog/${category.id}`}
+                          to={`/blog/${article._id}`}
                           type="button"
                           className="btn btn-sm btn-outline-secondary"
                         >

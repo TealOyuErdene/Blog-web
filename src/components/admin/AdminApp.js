@@ -2,13 +2,14 @@ import NavbarAdmin from "./navbarAdmin";
 import { Route, Routes } from "react-router-dom";
 import { ArticlesNew } from "./articlesNew";
 import { Articles } from "./articles";
-import { Login } from "./Login/main";
+
 import { Categories } from "./categories";
+import { User } from "./Login&Register/main";
 // import { Sidebar } from "./Sidebar/sidebar";
 
 export function AdminApp() {
   if (!localStorage.getItem("loginToken")) {
-    return <Login />;
+    return <User />;
   }
 
   return (

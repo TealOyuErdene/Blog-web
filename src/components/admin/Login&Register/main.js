@@ -1,7 +1,7 @@
-import "./login.css";
+import "./main.css";
 import { useRef, useState } from "react";
 import axios from "axios";
-export function Login() {
+export function User() {
   const divEl = useRef();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,9 +14,7 @@ export function Login() {
 
   function handleLogin() {
     axios
-      .get(
-        `http://localhost:8000/login?username=${username}&password=${password}`
-      )
+      .post(`http://localhost:8000/users/login`, { username, password })
       .then((res) => {
         const { data, status } = res;
         if (status === 200) {
@@ -26,11 +24,28 @@ export function Login() {
         }
       })
       .catch(({ response, code }) => {
-        if (response.status === 401) {
-          alert("Нууц үг буруу байна");
-        } else {
-          alert(code);
-        }
+        // if (response.status === 401) {
+        //   alert("Нууц үг буруу байна");
+        // } else {
+        //   alert(code);
+        // }
+      });
+  }
+
+  function handleRegister() {
+    axios
+      .post(`http://localhost:8000/users/register`, { username, password })
+      .then((res) => {
+        const { data, status } = res;
+        //   if (status === 200) {
+        //     const { token } = data;
+        //     localStorage.setItem("loginToken", token);
+        //     window.location.reload();
+        //   }
+      })
+      .catch(({ response, code }) => {
+        const { data } = response;
+        alert(data.message);
       });
   }
   return (

@@ -48,12 +48,14 @@ export function Home() {
                         <div className="card-banner">
                           <img
                             className="banner-img"
-                            src={article.image}
+                            src={article.image.path}
                             alt=""
                           />
                         </div>
                         <div className="blog-body">
-                          <p className="blog-time">Today</p>
+                          <p className="blog-time">
+                            {article.categoryId?.name}
+                          </p>
                           <p className="blog-title">{article.title}</p>
                         </div>
                       </div>

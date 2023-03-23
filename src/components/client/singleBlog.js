@@ -36,7 +36,7 @@ export function SingleBlog() {
         </Badge>
 
         <h1>{article.title}</h1>
-        <img style={{ width: "100%" }} src={article.image} />
+        <img style={{ width: "100%" }} src={article.image.path} />
         <div className="content mt-3">{parse(article.text)}</div>
       </div>
     </>
