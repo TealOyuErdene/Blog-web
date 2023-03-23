@@ -1,10 +1,13 @@
 import "./main.css";
 import { useRef, useState } from "react";
 import axios from "axios";
+import { useRegister } from "./useRegister";
 export function User() {
   const divEl = useRef();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const register = useRegister()
   function signUp() {
     divEl.current.classList.add("right-panel-active");
   }

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export function Register() {
+export function useRegister() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,4 +21,11 @@ export function Register() {
         alert(data.message);
       });
   }
+
+  return {
+    username,
+    setUsername,
+    password,
+    setPassword,
+  };
 }
