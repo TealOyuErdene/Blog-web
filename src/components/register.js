@@ -12,7 +12,7 @@ export function Register() {
         password,
       })
       .then((res) => {
-        const { data, status } = res;
+        // const { data, status } = res;
         //   if (status === 200) {
         //     const { token } = data;
         //     localStorage.setItem("loginToken", token);
