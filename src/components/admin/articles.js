@@ -13,7 +13,7 @@ export function Articles() {
   function loadArticles(page) {
     const token = localStorage.getItem("loginToken");
     axios
-      .get(`http://localhost:8000/articles?q=${query}&page=${page}`)
+      .get(`${process.env.REACT_APP_API_URL}/articles?q=${query}&page=${page}`)
       .then((res) => {
         const { data, status } = res;
         if (status === 200) {

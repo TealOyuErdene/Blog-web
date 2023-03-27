@@ -5,12 +5,14 @@ import axios from "axios";
 export function CategoriesList({ list, loadCategory, onEdit }) {
   function handleDelete(_id) {
     if (window.confirm("Устгах уу")) {
-      axios.delete(`http://localhost:8000/categories/${_id}`).then((res) => {
-        const { status } = res;
-        if (status === 200) {
-          loadCategory();
-        }
-      });
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/categories/${_id}`)
+        .then((res) => {
+          const { status } = res;
+          if (status === 200) {
+            loadCategory();
+          }
+        });
     }
   }
 

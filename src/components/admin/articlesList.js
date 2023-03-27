@@ -4,13 +4,15 @@ import { Link } from "react-router-dom";
 export function ArticlesList({ article, loadArticles }) {
   function handleDelete(_id) {
     if (window.confirm("Устгах уу")) {
-      axios.delete(`http://localhost:8000/articles/item/${_id}`).then((res) => {
-        const { status } = res;
-        if (status === 200) {
-          loadArticles();
-          window.location.reload();
-        }
-      });
+      axios
+        .delete(`${process.env.REACT_APP_API_URL}/articles/item/${_id}`)
+        .then((res) => {
+          const { status } = res;
+          if (status === 200) {
+            loadArticles();
+            window.location.reload();
+          }
+        });
     }
   }
 

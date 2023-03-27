@@ -13,7 +13,7 @@ export function Login() {
 
   function handleLogin() {
     axios
-      .post(`http://localhost:8000/users/login`, {
+      .post(`${process.env.REACT_APP_API_URL}/users/login`, {
         username,
         password,
       })
@@ -45,6 +45,7 @@ export function Login() {
         <input
           className="form-control"
           placeholder="Нууц үг"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />

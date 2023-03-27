@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 export function NavbarClient() {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/categories`).then((res) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/categories`).then((res) => {
       const { data, status } = res;
       if (status === 200) {
         setCategories(data);

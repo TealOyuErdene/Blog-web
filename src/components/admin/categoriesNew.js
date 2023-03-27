@@ -32,7 +32,7 @@ export function CategoriesNew({
   useEffect(() => {
     if (editingId && editingId !== "new") {
       axios
-        .get(` http://localhost:8000/categories/${editingId}`)
+        .get(`${process.env.REACT_APP_API_URL}/categories/${editingId}`)
         .then((res) => {
           const { data, status } = res;
           if (status === 200) {
@@ -51,7 +51,7 @@ export function CategoriesNew({
       setLoading(true);
       if (editingId === "new") {
         axios
-          .post("http://localhost:8000/categories", {
+          .post(`${process.env.REACT_APP_API_URL}/categories`, {
             name: text,
           })
           .then((res) => {
@@ -76,7 +76,9 @@ export function CategoriesNew({
           });
       } else {
         axios
-          .put(`http://localhost:8000/categories/${editingId}`, { name: name })
+          .put(`${process.env.REACT_APP_API_URL}/categories/${editingId}`, {
+            name: name,
+          })
           .then((res) => {
             const { status } = res;
             if (status === 200) {

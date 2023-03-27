@@ -8,7 +8,9 @@ export function SearchArticles({ searchedQuery }) {
   function loadArticles(searchedQuery = "") {
     const token = localStorage.getItem("loginToken");
     axios
-      .get(`http://localhost:8000/articles?q=${searchedQuery}&token=${token}`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/articles?q=${searchedQuery}&token=${token}`
+      )
       .then((res) => {
         const { data, status } = res;
         if (status === 200) {

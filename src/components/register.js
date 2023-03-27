@@ -7,7 +7,7 @@ export function Register() {
 
   function handleRegister() {
     axios
-      .post(`http://localhost:8000/users/register`, {
+      .post(`${process.env.REACT_APP_API_URL}/users/register`, {
         username,
         password,
       })
@@ -36,6 +36,7 @@ export function Register() {
         <input
           className="form-control"
           placeholder="Нууц үг"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
