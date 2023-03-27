@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 export function NavbarClient() {
   const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_URL}/categories`).then((res) => {
+function loadCategory(query = "") {
+  const token = localStorage.getItem("loginToken");
+  axios
+    .get(
+      `${process.env.REACT_APP_API_URL}/categories?q=${query}&token=${token}`
+    )
+    .then((res) => {
       const { data, status } = res;
       if (status === 200) {
         setCategories(data);
@@ -13,7 +18,11 @@ export function NavbarClient() {
         alert(`Error: ${status}`);
       }
     });
-  }, []);
+}
+
+    useEffect(() => {
+      loadCategory();
+    }, []);
 
   return (
     <>
