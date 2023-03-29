@@ -16,7 +16,6 @@ export function Home() {
         if (status === 200) {
           const { list, count } = data;
           setArticles(list);
-          console.log(list)
           setPages(Math.ceil(count / 10));
         } else {
           alert(`Error: ${status}`);
@@ -49,7 +48,7 @@ export function Home() {
                         <div className="card-banner">
                           <img
                             className="banner-img"
-                            src={article.image.path}
+                            src={article.image?.path}
                             alt=""
                           />
                         </div>
