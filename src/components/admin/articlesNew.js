@@ -14,7 +14,7 @@ export function ArticlesNew() {
 
   function submit() {
     axios
-      .post("${process.env.REACT_APP_API_URL}/articles", {
+      .post(`${process.env.REACT_APP_API_URL}/articles`, {
         title,
         text,
         categoryId,

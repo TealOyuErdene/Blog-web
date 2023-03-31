@@ -42,7 +42,9 @@ function NormalItem({ handleDelete, item, onEdit }) {
         className="mb-4 d-flex flex-row col-lg-6 "
         style={{ width: "400px" }}
       >
-        <Card.Body>{item.name}</Card.Body>
+        <Card.Body>
+          {item.name} ({item.count})
+        </Card.Body>
       </Card>
       <Button
         variant="outline-secondary mt-2 mx-3 border-0"
